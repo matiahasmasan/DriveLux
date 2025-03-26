@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Favorites - DriveLux</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .favorites-header {
+        background-color: var(--secondary-color);
+        color: white;
+        padding: 60px 0;
+        margin-bottom: 40px;
+      }
+
+      .car-gallery {
+        padding-bottom: 60px;
+      }
+
+      .car-card {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+        background-color: white;
+      }
+
+      .car-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .car-img-container {
+        height: 220px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .car-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .car-card:hover .car-img {
+        transform: scale(1.05);
+      }
+
+      .car-category {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background-color: var(--primary-color);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .car-details {
+        padding: 20px;
+      }
+
+      .car-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .car-specs {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        font-size: 14px;
+        color: var(--secondary-color);
+      }
+
+      .car-price {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid #eee;
+        padding-top: 15px;
+        margin-top: 5px;
+      }
+
+      .price-amount {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--secondary-color);
+      }
+
+      .price-period {
+        font-size: 14px;
+        color: #777;
+      }
+
+      .favorite-btn {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border: none;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .favorite-btn:hover {
+        background-color: white;
+        transform: scale(1.1);
+      }
+
+      .favorite-btn .fa-heart {
+        color: var(--primary-color);
+        font-size: 18px;
+      }
+
+      .empty-favorites {
+        text-align: center;
+        padding: 60px 0;
+      }
+
+      .empty-favorites i {
+        font-size: 80px;
+        color: #ddd;
+        margin-bottom: 20px;
+      }
+
+      .empty-favorites h3 {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: var(--secondary-color);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar will be loaded here -->
+    <div id="navbar-container"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-content">
+      <!-- Favorites Header -->
+      <div class="favorites-header">
+        <div class="container">
+          <h1 class="text-center mb-2">My Favorite Vehicles</h1>
+          <p class="text-center lead">
+            Your personally curated collection of luxury vehicles
+          </p>
+        </div>
+      </div>
+
+      <!-- Car Gallery -->
+      <div class="container car-gallery">
+        <!-- Empty favorites message (shown if no favorites) -->
+        <div id="empty-favorites" class="empty-favorites" style="display: none">
+          <i class="far fa-heart"></i>
+          <h3>Your favorites list is empty</h3>
+          <p>Explore our fleet and add vehicles to your favorites</p>
+          <a href="galerie.html" class="btn btn-primary">Browse Our Fleet</a>
+        </div>
+
+        <!-- Favorites Grid -->
+        <div class="row g-4" id="favorites-container">
+          <!-- Favorite cars will be loaded here dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer will be loaded here -->
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get favorites from localStorage
+        const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+        const favoritesContainer = document.getElementById(
+          "favorites-container"
+        );
+        const emptyFavorites = document.getElementById("empty-favorites");
+
+        // Update favorite count in navbar
+        updateFavoriteCount();
+
+        if (favorites.length === 0) {
+          // Show empty favorites message
+          emptyFavorites.style.display = "block";
+          favoritesContainer.style.display = "none";
+        } else {
+          // Hide empty favorites message
+          emptyFavorites.style.display = "none";
+          favoritesContainer.style.display = "flex";
+
+          // Generate HTML for each favorite car
+          let favoritesHTML = "";
+
+          favorites.forEach((car) => {
+            favoritesHTML += `
+              <div class="col-lg-4 col-md-6">
+                <div class="car-card">
+                  <div class="car-img-container">
+                    <img src="${car.img}" alt="${car.title}" class="car-img" />
+                    <div class="car-category">${car.category}</div>
+                    <button class="favorite-btn active" data-id="${car.id}">
+                      <i class="fas fa-heart"></i>
+                    </button>
+                  </div>
+                  <div class="car-details">
+                    <h3 class="car-title">${car.title}</h3>
+                    <div class="car-price">
+                      <div>
+                        <span class="price-amount">$${car.price}</span>
+                        <span class="price-period">/ day</span>
+                      </div>
+                      <a href="car_details.html?id=${car.id}" class="btn btn-primary">View Details</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+          });
+
+          favoritesContainer.innerHTML = favoritesHTML;
+
+          // Add event listeners to favorite buttons
+          document.querySelectorAll(".favorite-btn").forEach((btn) => {
+            btn.addEventListener("click", function () {
+              const carId = this.getAttribute("data-id");
+              removeFromFavorites(carId, this.closest(".col-lg-4"));
+            });
+          });
+        }
+
+        function removeFromFavorites(carId, cardElement) {
+          // Remove from favorites array
+          const carIndex = favorites.findIndex((car) => car.id === carId);
+          if (carIndex !== -1) {
+            favorites.splice(carIndex, 1);
+          }
+
+          // Save to localStorage
+          localStorage.setItem("favorites", JSON.stringify(favorites));
+
+          // Remove the card with animation
+          cardElement.style.opacity = "0";
+          setTimeout(() => {
+            cardElement.remove();
+
+            // If no favorites left, show empty message
+            if (favorites.length === 0) {
+              emptyFavorites.style.display = "block";
+              favoritesContainer.style.display = "none";
+            }
+
+            // Update favorite count in navbar
+            updateFavoriteCount();
+          }, 300);
+        }
+
+        function updateFavoriteCount() {
+          const countElement = document.getElementById("favorite-count");
+          if (countElement) {
+            countElement.textContent = favorites.length;
+            countElement.style.display = favorites.length > 0 ? "flex" : "none";
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

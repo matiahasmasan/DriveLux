@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DriveLux | Premium Car Rental</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Navbar will be injected here -->
+    <div id="navbar-container"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="display-4 fw-bold mb-4">Drive Your Dreams</h1>
+          <p class="lead mb-4">
+            Experience luxury and comfort with our premium car rental service.
+            Choose from our wide range of vehicles for any occasion.
+          </p>
+          <div class="d-flex gap-3">
+            <a href="galerie.html"
+              ><button class="btn btn-primary btn-lg">Book Now</button></a
+            >
+            <a href="aboutus.html"
+              ><button class="btn btn-outline-light btn-lg">About us</button></a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Car Cards Section -->
+    <section class="car-section">
+      <div class="container">
+        <h2 class="text-center mb-5">Our Featured Vehicles</h2>
+        <div class="row g-4">
+          <!-- Car Card 1 -->
+          <div class="col-md-4">
+            <div class="car-card card shadow-sm h-100">
+              <img
+                src="https://freepngimg.com/thumb/car/4-2-car-png-hd.png"
+                class="car-img card-img-top"
+                alt="SUV"
+              />
+              <div class="card-body">
+                <h4 class="card-title">Luxury SUV</h4>
+                <p class="card-text text-muted">
+                  Spacious, comfortable and powerful. Perfect for family trips
+                  and adventures.
+                </p>
+                <div class="car-specs">
+                  <div class="spec-item"><i class="fas fa-user"></i> 7</div>
+                  <div class="spec-item"><i class="fas fa-suitcase"></i> 5</div>
+                  <div class="spec-item">
+                    <i class="fas fa-gas-pump"></i> Hybrid
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer bg-white border-top-0">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="fw-bold">
+                    $120 <span class="text-muted fw-normal">/ day</span>
+                  </div>
+                  <button class="btn btn-sm btn-outline-primary">
+                    Rent Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Car Card 2 -->
+          <div class="col-md-4">
+            <div class="car-card card shadow-sm h-100">
+              <img
+                src="https://www.freeiconspng.com/uploads/red-sports-car-png-1.png"
+                class="car-img card-img-top"
+                alt="Sports Car"
+              />
+              <div class="card-body">
+                <h4 class="card-title">Sports Coupe</h4>
+                <p class="card-text text-muted">
+                  Sleek, fast and exhilarating. The perfect companion for a
+                  weekend getaway.
+                </p>
+                <div class="car-specs">
+                  <div class="spec-item"><i class="fas fa-user"></i> 2</div>
+                  <div class="spec-item"><i class="fas fa-suitcase"></i> 2</div>
+                  <div class="spec-item">
+                    <i class="fas fa-tachometer-alt"></i> Fast
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer bg-white border-top-0">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="fw-bold">
+                    $200 <span class="text-muted fw-normal">/ day</span>
+                  </div>
+                  <button class="btn btn-sm btn-outline-primary">
+                    Rent Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Car Card 3 -->
+          <div class="col-md-4">
+            <div class="car-card card shadow-sm h-100">
+              <img
+                src="https://pngimg.com/d/tesla_car_PNG21.png"
+                class="car-img card-img-top"
+                alt="Electric Car"
+              />
+              <div class="card-body">
+                <h4 class="card-title">Electric Sedan</h4>
+                <p class="card-text text-muted">
+                  Eco-friendly, silent and modern. Explore the city with zero
+                  emissions.
+                </p>
+                <div class="car-specs">
+                  <div class="spec-item"><i class="fas fa-user"></i> 5</div>
+                  <div class="spec-item"><i class="fas fa-suitcase"></i> 3</div>
+                  <div class="spec-item">
+                    <i class="fas fa-bolt"></i> Electric
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer bg-white border-top-0">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="fw-bold">
+                    $150 <span class="text-muted fw-normal">/ day</span>
+                  </div>
+                  <button class="btn btn-sm btn-outline-primary">
+                    Rent Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+      <div class="container">
+        <h2 class="text-center mb-5">Why Choose DriveLux</h2>
+        <div class="row g-4">
+          <div class="col-md-3">
+            <div class="feature-box shadow-sm">
+              <i class="fas fa-car feature-icon"></i>
+              <h4>Premium Fleet</h4>
+              <p>
+                Latest models from top brands, regularly maintained for your
+                safety and comfort.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="feature-box shadow-sm">
+              <i class="fas fa-money-bill-wave feature-icon"></i>
+              <h4>Best Rates</h4>
+              <p>
+                Competitive pricing with no hidden fees. Transparent pricing
+                policy.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="feature-box shadow-sm">
+              <i class="fas fa-headset feature-icon"></i>
+              <h4>24/7 Support</h4>
+              <p>
+                Our customer service team is always ready to assist you anytime,
+                anywhere.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="feature-box shadow-sm">
+              <i class="fas fa-map-marked-alt feature-icon"></i>
+              <h4>Flexible Pickup</h4>
+              <p>
+                Multiple locations available for your convenience. Airport
+                pickup available.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-5">
+          <h3 class="mb-4">Ready to hit the road?</h3>
+          <button class="btn btn-primary btn-lg">Book Your Car Now</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="bg-light py-5">
+      <div class="container reviews-container">
+        <h2 class="text-center mb-5">Reviews</h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="mb-3 text-warning">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <p class="card-text">
+                  "The service was exceptional. The car was in perfect condition
+                  and the staff was very friendly and professional."
+                </p>
+              </div>
+              <div class="card-footer bg-white">
+                <div class="d-flex align-items-center">
+                  <img
+                    src="images/profile.png"
+                    class="rounded-circle me-3"
+                    style="width: 20%"
+                    alt="Customer"
+                  />
+                  <div>
+                    <h6 class="mb-0">Sarah Johnson</h6>
+                    <small class="text-muted">Business Traveler</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="mb-3 text-warning">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <p class="card-text">
+                  "Renting the sports car for my anniversary was the best
+                  decision. It made our weekend trip unforgettable!"
+                </p>
+              </div>
+              <div class="card-footer bg-white">
+                <div class="d-flex align-items-center">
+                  <img
+                    src="images/profile.png"
+                    class="rounded-circle me-3"
+                    style="width: 20%"
+                    alt="Customer"
+                  />
+                  <div>
+                    <h6 class="mb-0">Michael Thompson</h6>
+                    <small class="text-muted">Weekend Traveler</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="mb-3 text-warning">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="card-text">
+                  "The SUV was perfect for our family vacation. Spacious,
+                  comfortable and the kids loved it. Will definitely rent
+                  again!"
+                </p>
+              </div>
+              <div class="card-footer bg-white">
+                <div class="d-flex align-items-center">
+                  <img
+                    src="images/profile.png"
+                    class="rounded-circle me-3"
+                    style="width: 20%"
+                    alt="Customer"
+                  />
+                  <div>
+                    <h6 class="mb-0">Jennifer Davis</h6>
+                    <small class="text-muted">Family Traveler</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-5">
+        <a href="reviews.html"
+          ><button class="btn btn-primary btn-lg">
+            Write your own review
+          </button></a
+        >
+      </div>
+    </section>
+    <!-- Footer will be injected here -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+  </body>
+</html>

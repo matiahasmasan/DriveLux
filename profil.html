@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile | DriveLux</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .profile-section {
+        padding: 80px 0;
+        background-color: #f5f7fa;
+      }
+      .profile-card {
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      .profile-header {
+        background-color: #3498db;
+        color: white;
+        border-radius: 10px 10px 0 0;
+        padding: 30px;
+      }
+      .profile-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 4px solid white;
+        background-color: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .profile-avatar i {
+        font-size: 60px;
+        color: #2c3e50;
+      }
+      .profile-info {
+        padding: 30px;
+      }
+      .info-item {
+        margin-bottom: 20px;
+      }
+      .info-label {
+        font-size: 0.9rem;
+        color: #6c757d;
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar will be injected here -->
+    <div id="navbar-container"></div>
+
+    <section class="profile-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="card profile-card">
+              <div class="profile-header">
+                <div class="d-flex align-items-center">
+                  <div class="profile-avatar">
+                    <i class="fas fa-user"></i>
+                  </div>
+                  <div class="ms-4">
+                    <h2>John Doe</h2>
+                    <p class="mb-0">Member since January 2025</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="profile-info">
+                <h4 class="mb-4">Personal Information</h4>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="info-item">
+                      <p class="info-label">Full Name</p>
+                      <p class="fs-5">John Doe</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="info-item">
+                      <p class="info-label">Email Address</p>
+                      <p class="fs-5">john.doe@example.com</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="info-item">
+                      <p class="info-label">Phone Number</p>
+                      <p class="fs-5">+1 (555) 123-4567</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="info-item">
+                      <p class="info-label">Date of Birth</p>
+                      <p class="fs-5">April 15, 1985</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="info-item">
+                      <p class="info-label">Address</p>
+                      <p class="fs-5">
+                        123 Main Street<br />Los Angeles, CA 90001
+                      </p>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="info-item">
+                      <p class="info-label">Driver's License</p>
+                      <p class="fs-5">CA12345678</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12">
+                    <div class="info-item">
+                      <p class="info-label">Membership Status</p>
+                      <p class="fs-5">
+                        <span class="badge bg-success">Premium Member</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4 d-flex justify-content-end">
+                  <button class="btn btn-outline-secondary me-2">
+                    Change Password
+                  </button>
+                  <button class="btn btn-primary">Edit Profile</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer will be injected here -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+  </body>
+</html>

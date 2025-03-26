@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Locations - DriveLux</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .locations-header {
+        background-color: var(--secondary-color);
+        color: white;
+        padding: 60px 0;
+        margin-bottom: 40px;
+      }
+
+      .locations-section {
+        padding-bottom: 60px;
+      }
+
+      .location-card {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 40px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .location-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .location-image {
+        height: 250px;
+        overflow: hidden;
+      }
+
+      .location-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .location-card:hover .location-image img {
+        transform: scale(1.05);
+      }
+
+      .location-details {
+        padding: 25px;
+      }
+
+      .location-title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: var(--secondary-color);
+      }
+
+      .location-info {
+        margin-bottom: 15px;
+      }
+
+      .info-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 10px;
+      }
+
+      .info-icon {
+        color: var(--primary-color);
+        margin-right: 10px;
+        min-width: 20px;
+        margin-top: 4px;
+      }
+
+      .working-hours {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+
+      .hours-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+      }
+
+      .hours-day {
+        font-weight: 500;
+      }
+
+      .featured-badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background-color: var(--primary-color);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 14px;
+        z-index: 10;
+      }
+
+      .map-container {
+        height: 400px;
+        margin-top: 60px;
+        margin-bottom: 40px;
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .map-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar will be loaded here -->
+    <div id="navbar-container"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-content">
+      <!-- Locations Header -->
+      <div class="locations-header">
+        <div class="container">
+          <h1 class="text-center mb-2">Our Locations</h1>
+          <p class="text-center lead">
+            Find us at one of our convenient pickup and drop-off locations
+          </p>
+        </div>
+      </div>
+
+      <!-- Locations Section -->
+      <div class="container locations-section">
+        <div class="row">
+          <!-- Location 1: Downtown -->
+          <div class="col-lg-4 col-md-6">
+            <div class="location-card position-relative">
+              <div class="featured-badge">Featured</div>
+              <div class="location-image">
+                <img src="images/andemidi1.jpg" alt="Downtown Location" />
+              </div>
+              <div class="location-details">
+                <h3 class="location-title">Downtown Branch</h3>
+
+                <div class="location-info">
+                  <div class="info-item">
+                    <i class="fas fa-map-marker-alt info-icon"></i>
+                    <div>123 Luxury Avenue<br />Miami, FL 33101</div>
+                  </div>
+                  <div class="info-item">
+                    <i class="fas fa-phone info-icon"></i>
+                    <div>(305) 555-1234</div>
+                  </div>
+                  <div class="info-item">
+                    <i class="fas fa-envelope info-icon"></i>
+                    <div>downtown@drivelux.com</div>
+                  </div>
+                </div>
+
+                <div class="working-hours">
+                  <h5 class="mb-3">Working Hours</h5>
+                  <div class="hours-row">
+                    <span class="hours-day">Monday - Friday:</span>
+                    <span>8:00 AM - 8:00 PM</span>
+                  </div>
+                  <div class="hours-row">
+                    <span class="hours-day">Saturday:</span>
+                    <span>9:00 AM - 6:00 PM</span>
+                  </div>
+                  <div class="hours-row">
+                    <span class="hours-day">Sunday:</span>
+                    <span>10:00 AM - 4:00 PM</span>
+                  </div>
+                </div>
+
+                <div class="location-features mb-3">
+                  <h5 class="mb-2">Features:</h5>
+                  <div>
+                    <i class="fas fa-check-circle text-success me-2"></i> Full
+                    fleet available
+                  </div>
+                  <div>
+                    <i class="fas fa-check-circle text-success me-2"></i> Luxury
+                    lounge
+                  </div>
+                  <div>
+                    <i class="fas fa-check-circle text-success me-2"></i> Valet
+                    service
+                  </div>
+                  <div>
+                    <i class="fas fa-check-circle text-success me-2"></i>
+                    Premium vehicle detailing
+                  </div>
+                </div>
+
+                <a
+                  href="https://maps.google.com"
+                  target="_blank"
+                  class="btn btn-outline-primary"
+                  >Get Directions</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Location 2: Airport -->
+          <div class="col-lg-4 col-md-6">
+            <div class="location-card">
+              <div class="location-image">
+                <img
+                  src="images/andemidi2.jpg"
+                  alt="Airport Terminal Location"
+                />
+              </div>
+              <div class="location-details">
+                <h3 class="location-title">Airport Terminal</h3>
+
+                <div class="location-info">
+                  <div class="info-item">
+                    <i class="fas fa-map-marker-alt info-icon"></i>
+                    <div>
+                      Miami International Airport<br />Terminal C, Ground
+                      Floor<br />Miami, FL 33126
+                    </div>
+                  </div>
+                  <div class="info-item">
+                    <i class="fas fa-phone info-icon"></i>
+                    <div>(305) 555-6789</div>
+                  </div>
+                  <div class="info-item">
+                    <i class="fas fa-envelope info-icon"></i>
+                    <div>airport@drivelux.com</div>
+                  </div>
+                </div>
+
+                <div class="working-hours">
+                  <h5 class="mb-3">Working Hours</h5>
+                  <div class="hours-row">
+                    <span class="hours-day">Monday - Sunday:</span>
+                    <span>6:00 AM - 12:00 AM</span>
+                  </div>
+                </div>
+
+                <div class="location-features mb-3">
+                  <h5 class="mb-2">Features:</h5>
+                  <div>
+                    <i class="fas fa-check-circle text-success me-2"></i>
+                    Terminal pickup service
+                  </div>
+                  <div>
+                    <i class="fas fa-check-circle text-success me-2"></i> Quick
+                    check-in kiosks
+                  </div>
+                  <div>
+                    <i class="fas fa-check-circle text-success me-2"></i>
+                    Limited fleet selection
+                  </div>
+                  <div>
+                    <i class="fas fa-check-circle text-success me-2"></i> 24/7
+                    emergency assistance
+                  </div>
+                </div>
+
+                <a
+                  href="https://maps.google.com"
+                  target="_blank"
+                  class="btn btn-outline-primary"
+                  >Get Directions</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Location 3: Beach Area -->
+          <div class="col-lg-4 col-md-6">
+            <div class="location-card">
+              <div class="location-image">
+                <img src="images/andemidi3.jpg" alt="Beach Area Location" />
+              </div>
+              <div class="location-details">
+                <h3 class="location-title">South Beach Branch</h3>
+
+                <div class="location-info">
+                  <div class="info-item">
+                    <i class="fas fa-map-marker-alt info-icon"></i>
+                    <div>456 Ocean Drive<br />Miami Beach, FL 33139</div>
+                  </div>
+                  <div class="info-item">
+                    <i class="fas fa-phone info-icon"></i>
+                    <div>(305) 555-9876</div>
+                  </div>
+                  <div class="info-item">
+                    <i class="fas fa-envelope info-icon"></i>
+                    <div>beach@drivelux.com</div>
+                  </div>
+                </div>
+
+                <div class="working-hours">
+                  <h5 class="mb-3">Working Hours</h5>
+                  <div class="hours-row">
+                    <span class="hours-day">Monday - Thursday:</span>
+                    <span>9:00 AM - 7:00 PM</span>
+                  </div>
+                  <div class="hours-row">
+                    <span class="hours-day">Friday - Saturday:</span>
+                    <span>9:00 AM - 10:00 PM</span>
+                  </div>
+                  <div class="hours-row">
+                    <span class="hours-day">Sunday:</span>
+                    <span>10:00 AM - 6:00 PM</span>
+                  </div>
+                </div>
+
+                <div class="location-features mb-3">
+                  <h5 class="mb-2">Features:</h5>
+                  <div>
+                    <i class="fas fa-check-circle text-success me-2"></i>
+                    Convertible specialists
+                  </div>
+                  <div>
+                    <i class="fas fa-check-circle text-success me-2"></i> Beach
+                    equipment included
+                  </div>
+                  <div>
+                    <i class="fas fa-check-circle text-success me-2"></i> Hotel
+                    delivery available
+                  </div>
+                  <div>
+                    <i class="fas fa-check-circle text-success me-2"></i>
+                    Weekend special packages
+                  </div>
+                </div>
+
+                <a
+                  href="https://maps.google.com"
+                  target="_blank"
+                  class="btn btn-outline-primary"
+                  >Get Directions</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map Section -->
+        <div class="map-container shadow">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2688.0761882094566!2d23.58300017679407!3d47.644086285387544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4737dbdc3b9c08f1%3A0xad9e87301f8f783e!2sAndemidi!5e0!3m2!1sen!2sro!4v1743023761396!5m2!1sen!2sro"
+            width="600"
+            height="450"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="text-center mt-5">
+          <h3 class="mb-3">Need More Information?</h3>
+          <p class="lead mb-4">
+            Our customer service team is ready to assist you with any questions
+            or special requests.
+          </p>
+          <div class="d-flex justify-content-center gap-3">
+            <a href="tel:+18005551234" class="btn btn-outline-primary"
+              ><i class="fas fa-phone me-2"></i> (800) 555-1234</a
+            >
+            <a href="contact.html" class="btn btn-primary"
+              ><i class="fas fa-envelope me-2"></i> Contact Us</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer will be loaded here -->
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+  </body>
+</html>

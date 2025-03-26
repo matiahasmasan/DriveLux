@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Bookings | DriveLux</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .bookings-section {
+        padding: 80px 0;
+        background-color: #f5f7fa;
+        min-height: 80vh;
+      }
+      .booking-card {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: none;
+      }
+      .booking-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+      .booking-header {
+        background-color: #3498db;
+        color: white;
+        padding: 15px 20px;
+      }
+      .booking-active {
+        background-color: #2ecc71;
+      }
+      .booking-upcoming {
+        background-color: #f39c12;
+      }
+      .booking-car-icon {
+        font-size: 2rem;
+        color: #3498db;
+      }
+      .booking-info {
+        padding: 0;
+      }
+      .booking-info-item {
+        padding: 12px 20px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+      .booking-info-item:last-child {
+        border-bottom: none;
+      }
+      .booking-label {
+        font-size: 0.8rem;
+        color: #6c757d;
+        margin-bottom: 3px;
+      }
+      .booking-value {
+        font-weight: 500;
+      }
+      .section-title {
+        position: relative;
+        margin-bottom: 40px;
+        padding-bottom: 15px;
+      }
+      .section-title:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        width: 50px;
+        background-color: #3498db;
+      }
+      .empty-state {
+        text-align: center;
+        padding: 50px 0;
+      }
+      .empty-icon {
+        font-size: 4rem;
+        color: #ccc;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar will be injected here -->
+    <div id="navbar-container"></div>
+
+    <section class="bookings-section">
+      <div class="container">
+        <h2 class="section-title">My Bookings</h2>
+
+        <!-- Active Bookings -->
+        <div class="mb-5">
+          <h4 class="mb-4">Active Rentals</h4>
+          <div class="row g-4">
+            <!-- Active Booking 1 -->
+            <div class="col-lg-6">
+              <div class="card booking-card">
+                <div
+                  class="booking-header booking-active d-flex justify-content-between align-items-center"
+                >
+                  <h5 class="mb-0">Electric Sedan</h5>
+                  <span class="badge bg-light text-dark">Active</span>
+                </div>
+                <ul class="list-group booking-info">
+                  <li class="list-group-item booking-info-item">
+                    <div class="booking-label">Rental Period</div>
+                    <div class="booking-value">Mar 20, 2025 - Mar 25, 2025</div>
+                  </li>
+                  <li class="list-group-item booking-info-item">
+                    <div class="booking-label">Pickup Location</div>
+                    <div class="booking-value">Beverly Hills Main Office</div>
+                  </li>
+                  <li class="list-group-item booking-info-item">
+                    <div class="booking-label">Booking Reference</div>
+                    <div class="booking-value">DL-25032025-ESD</div>
+                  </li>
+                  <li class="list-group-item booking-info-item">
+                    <div class="d-grid">
+                      <button class="btn btn-outline-primary btn-sm">
+                        View Details
+                      </button>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Active Booking 2 -->
+            <div class="col-lg-6">
+              <div class="card booking-card">
+                <div
+                  class="booking-header booking-active d-flex justify-content-between align-items-center"
+                >
+                  <h5 class="mb-0">Luxury SUV</h5>
+                  <span class="badge bg-light text-dark">Active</span>
+                </div>
+                <ul class="list-group booking-info">
+                  <li class="list-group-item booking-info-item">
+                    <div class="booking-label">Rental Period</div>
+                    <div class="booking-value">Mar 22, 2025 - Mar 29, 2025</div>
+                  </li>
+                  <li class="list-group-item booking-info-item">
+                    <div class="booking-label">Pickup Location</div>
+                    <div class="booking-value">LAX Airport</div>
+                  </li>
+                  <li class="list-group-item booking-info-item">
+                    <div class="booking-label">Booking Reference</div>
+                    <div class="booking-value">DL-22032025-SUV</div>
+                  </li>
+                  <li class="list-group-item booking-info-item">
+                    <div class="d-grid">
+                      <button class="btn btn-outline-primary btn-sm">
+                        View Details
+                      </button>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upcoming Bookings -->
+        <div class="mb-5">
+          <h4 class="mb-4">Upcoming Rentals</h4>
+          <div class="row g-4">
+            <!-- Upcoming Booking -->
+            <div class="col-lg-6">
+              <div class="card booking-card">
+                <div
+                  class="booking-header booking-upcoming d-flex justify-content-between align-items-center"
+                >
+                  <h5 class="mb-0">Sports Coupe</h5>
+                  <span class="badge bg-light text-dark">Upcoming</span>
+                </div>
+                <ul class="list-group booking-info">
+                  <li class="list-group-item booking-info-item">
+                    <div class="booking-label">Rental Period</div>
+                    <div class="booking-value">Apr 5, 2025 - Apr 7, 2025</div>
+                  </li>
+                  <li class="list-group-item booking-info-item">
+                    <div class="booking-label">Pickup Location</div>
+                    <div class="booking-value">Santa Monica Branch</div>
+                  </li>
+                  <li class="list-group-item booking-info-item">
+                    <div class="booking-label">Booking Reference</div>
+                    <div class="booking-value">DL-05042025-SPC</div>
+                  </li>
+                  <li class="list-group-item booking-info-item">
+                    <div class="d-flex justify-content-between">
+                      <button class="btn btn-outline-danger btn-sm">
+                        Cancel
+                      </button>
+                      <button class="btn btn-outline-primary btn-sm">
+                        Modify
+                      </button>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Past Bookings -->
+        <div>
+          <h4 class="mb-4">Past Rentals</h4>
+
+          <!-- Empty state for Past Bookings -->
+          <div class="card empty-state">
+            <div class="empty-icon">
+              <i class="fas fa-history"></i>
+            </div>
+            <h5>No past rentals found</h5>
+            <p class="text-muted">Your completed rentals will appear here</p>
+            <div class="mt-3">
+              <a href="galerie.html" class="btn btn-primary">Browse Cars</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer will be injected here -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+  </body>
+</html>

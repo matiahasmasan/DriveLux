@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Frequently Asked Questions - DriveLux</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .faq-header {
+        background-color: var(--secondary-color);
+        color: white;
+        padding: 60px 0;
+        margin-bottom: 40px;
+      }
+
+      .faq-section {
+        padding-bottom: 60px;
+      }
+
+      .category-card {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+      }
+
+      .category-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .category-icon {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+      }
+
+      .category-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: var(--secondary-color);
+      }
+
+      .accordion-button {
+        padding: 1.25rem;
+        font-weight: 500;
+      }
+
+      .accordion-button:not(.collapsed) {
+        background-color: rgba(var(--primary-color-rgb), 0.1);
+        color: var(--primary-color);
+      }
+
+      .accordion-button:focus {
+        box-shadow: none;
+        border-color: rgba(0, 0, 0, 0.125);
+      }
+
+      .accordion-body {
+        padding: 1.25rem;
+        line-height: 1.6;
+      }
+
+      .faq-tabs {
+        margin-bottom: 30px;
+        border-bottom: 1px solid #dee2e6;
+      }
+
+      .faq-tabs .nav-link {
+        margin-bottom: -1px;
+        border: 1px solid transparent;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+        padding: 0.75rem 1.25rem;
+        font-weight: 500;
+        color: #495057;
+      }
+
+      .faq-tabs .nav-link.active {
+        color: var(--primary-color);
+        background-color: #fff;
+        border-color: #dee2e6 #dee2e6 #fff;
+      }
+
+      .faq-search {
+        position: relative;
+        margin-bottom: 30px;
+      }
+
+      .faq-search input {
+        padding: 15px 20px;
+        border-radius: 50px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border: none;
+        font-size: 1rem;
+      }
+
+      .faq-search .search-icon {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--primary-color);
+      }
+
+      .support-section {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 30px;
+        margin-top: 40px;
+      }
+
+      .contact-card {
+        text-align: center;
+        padding: 25px;
+        border-radius: 10px;
+        background-color: white;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        height: 100%;
+      }
+
+      .contact-icon {
+        width: 60px;
+        height: 60px;
+        background-color: rgba(var(--primary-color-rgb), 0.1);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto 20px;
+        color: var(--primary-color);
+        font-size: 1.5rem;
+      }
+
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 99;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .back-to-top:hover {
+        background-color: var(--secondary-color);
+        transform: translateY(-5px);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar will be loaded here -->
+    <div id="navbar-container"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-content">
+      <!-- FAQ Header -->
+      <div class="faq-header">
+        <div class="container">
+          <h1 class="text-center mb-2">Frequently Asked Questions</h1>
+          <p class="text-center lead">
+            Find answers to common questions about our luxury car rental
+            services
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="container faq-section">
+        <!-- Search Bar -->
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <div class="faq-search">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search for questions..."
+              />
+              <span class="search-icon"><i class="fas fa-search"></i></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Cards -->
+        <div class="row mb-5">
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="category-card text-center p-4">
+              <div class="category-icon">
+                <i class="fas fa-car"></i>
+              </div>
+              <h3 class="category-title">Rental Process</h3>
+              <p class="text-muted">Booking, payments, modifications</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="category-card text-center p-4">
+              <div class="category-icon">
+                <i class="fas fa-credit-card"></i>
+              </div>
+              <h3 class="category-title">Pricing & Fees</h3>
+              <p class="text-muted">Rates, deposits, additional charges</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="category-card text-center p-4">
+              <div class="category-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <h3 class="category-title">Insurance & Safety</h3>
+              <p class="text-muted">Coverage options, requirements</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="category-card text-center p-4">
+              <div class="category-icon">
+                <i class="fas fa-map-marked-alt"></i>
+              </div>
+              <h3 class="category-title">Pickup & Return</h3>
+              <p class="text-muted">Locations, procedures, late returns</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Accordion -->
+        <div class="accordion" id="mainFAQ">
+          <!-- General Questions -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#general1"
+              >
+                What is DriveLux and what types of vehicles do you offer?
+              </button>
+            </h2>
+            <div
+              id="general1"
+              class="accordion-collapse collapse show"
+              data-bs-parent="#mainFAQ"
+            >
+              <div class="accordion-body">
+                DriveLux is a premium car rental service specializing in luxury,
+                sports, and exotic vehicles. Our fleet includes luxury sedans
+                (Mercedes-Benz S-Class, BMW 7 Series), luxury SUVs (Range Rover,
+                Cadillac Escalade), sports cars (Porsche 911, Corvette), and
+                exotic vehicles (Ferrari, Lamborghini). We also offer
+                convertibles and electric luxury vehicles. Our inventory varies
+                by location, so please check our Fleet page for current
+                availability.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#general2"
+              >
+                What are your business hours and locations?
+              </button>
+            </h2>
+            <div
+              id="general2"
+              class="accordion-collapse collapse"
+              data-bs-parent="#mainFAQ"
+            >
+              <div class="accordion-body">
+                Our headquarters is in Beverly Hills, California with branches
+                in Miami (Downtown, Airport Terminal, and South Beach). Our
+                standard business hours vary by location, generally 8:00 AM to
+                8:00 PM on weekdays with modified weekend hours. Our Airport
+                Terminal location is open daily from 6:00 AM to 12:00 AM. We
+                also offer after-hours pickup and drop-off by appointment. Visit
+                our Locations page for specific addresses and hours for each
+                branch.
+              </div>
+            </div>
+          </div>
+
+          <!-- Reservation Questions -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#reservations1"
+              >
+                How do I make a reservation and what information is required?
+              </button>
+            </h2>
+            <div
+              id="reservations1"
+              class="accordion-collapse collapse"
+              data-bs-parent="#mainFAQ"
+            >
+              <div class="accordion-body">
+                You can make reservations online through our website, by calling
+                (800) DRIVE-LUX, through our mobile app, or by visiting any
+                location in person. You'll need to provide your name, contact
+                information, desired pickup/return dates and locations, vehicle
+                preference, valid driver's license information, and payment
+                method for the deposit. We recommend booking in advance,
+                especially for exotic and high-demand vehicles.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#reservations2"
+              >
+                What are your age requirements for renting?
+              </button>
+            </h2>
+            <div
+              id="reservations2"
+              class="accordion-collapse collapse"
+              data-bs-parent="#mainFAQ"
+            >
+              <div class="accordion-body">
+                Age requirements vary by vehicle category: Luxury Sedans & SUVs
+                (minimum age 21), Sports Cars (minimum age 25), Exotic Cars
+                (minimum age 30, with ages 25-29 eligible with additional fee
+                and insurance), and Ultra-Exotic Cars (minimum age 30 with proof
+                of exotic car ownership or rental experience). All drivers must
+                have a valid driver's license held for at least 2 years.
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment Questions -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#payments1"
+              >
+                What payment methods do you accept and when am I charged?
+              </button>
+            </h2>
+            <div
+              id="payments1"
+              class="accordion-collapse collapse"
+              data-bs-parent="#mainFAQ"
+            >
+              <div class="accordion-body">
+                We accept major credit cards, debit cards with credit logos,
+                digital wallets (Apple Pay, Google Pay), and approved corporate
+                accounts. At reservation, we charge a 25% deposit, with the
+                remaining 75% charged 7 days before pickup. For last-minute
+                bookings, the full amount is charged at reservation. A security
+                deposit ($1,000-$25,000 depending on vehicle type) is held at
+                pickup and released upon satisfactory return of the vehicle.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#payments2"
+              >
+                Do you offer any discounts?
+              </button>
+            </h2>
+            <div
+              id="payments2"
+              class="accordion-collapse collapse"
+              data-bs-parent="#mainFAQ"
+            >
+              <div class="accordion-body">
+                Yes, we offer several discount programs including extended
+                rental discounts (10-15% off for 7+ days), corporate rates,
+                repeat customer loyalty program benefits, seasonal promotions,
+                partner hotel guest discounts (5-10% with proof of stay), and
+                military/first responder discounts (10% with valid ID). Visit
+                our Special Offers page for current promotions and details.
+              </div>
+            </div>
+          </div>
+
+          <!-- Vehicle Questions -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#vehicles1"
+              >
+                What is your mileage policy?
+              </button>
+            </h2>
+            <div
+              id="vehicles1"
+              class="accordion-collapse collapse"
+              data-bs-parent="#mainFAQ"
+            >
+              <div class="accordion-body">
+                Our mileage allowances depend on the vehicle category: Luxury
+                Sedans & SUVs (150 miles per day), Sports Cars (100 miles per
+                day), Exotic Cars (75 miles per day), and Ultra-Exotic Cars (50
+                miles per day). Additional mileage can be purchased in advance
+                at discounted rates. Unlimited mileage packages are available
+                for some vehicle categories for extended rentals.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#vehicles2"
+              >
+                Do you offer airport pickup and delivery services?
+              </button>
+            </h2>
+            <div
+              id="vehicles2"
+              class="accordion-collapse collapse"
+              data-bs-parent="#mainFAQ"
+            >
+              <div class="accordion-body">
+                Yes, we offer airport pickup and drop-off services at major
+                airports in our service areas. This service includes having a
+                DriveLux representative meet you at your terminal with your
+                vehicle. We also have a dedicated location at Miami
+                International Airport. Additionally, we offer vehicle delivery
+                and collection services to hotels, residences, and other
+                locations within our service areas for an additional fee.
+              </div>
+            </div>
+          </div>
+
+          <!-- Insurance Questions -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#insurance1"
+              >
+                What insurance options do you offer?
+              </button>
+            </h2>
+            <div
+              id="insurance1"
+              class="accordion-collapse collapse"
+              data-bs-parent="#mainFAQ"
+            >
+              <div class="accordion-body">
+                We offer several insurance coverage options: Standard Coverage
+                (included with all rentals, provides basic liability and damage
+                waiver with $2,000-$10,000 deductible), Premium Coverage
+                ($39-$99 per day, reduces deductible to $1,000-$2,500), and Full
+                Coverage ($79-$199 per day, reduces deductible to $0-$500). We
+                also offer supplemental liability and personal effects coverage.
+                For exotic vehicles, we may require our coverage regardless of
+                your personal insurance.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#insurance2"
+              >
+                What if I damage the vehicle?
+              </button>
+            </h2>
+            <div
+              id="insurance2"
+              class="accordion-collapse collapse"
+              data-bs-parent="#mainFAQ"
+            >
+              <div class="accordion-body">
+                In case of damage, report it immediately to our customer service
+                team and complete an incident report with photos. Your security
+                deposit will be held pending damage assessment. With our premium
+                insurance coverage, your liability is limited to the deductible.
+                Without insurance coverage, you're responsible for all damages
+                up to the full value of the vehicle. For major accidents,
+                contact emergency services first, then notify DriveLux
+                immediately.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Support Section -->
+        <div class="support-section mt-5">
+          <div class="row">
+            <div class="col-12 text-center mb-4">
+              <h3>Still have questions?</h3>
+              <p class="lead">Our customer support team is here to help you</p>
+            </div>
+            <div class="col-md-4 mb-4">
+              <div class="contact-card">
+                <div class="contact-icon">
+                  <i class="fas fa-phone-alt"></i>
+                </div>
+                <h5>Call Us</h5>
+                <p>(800) DRIVE-LUX</p>
+                <p class="text-muted small">Available 24/7 for assistance</p>
+              </div>
+            </div>
+            <div class="col-md-4 mb-4">
+              <div class="contact-card">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <h5>Email Us</h5>
+                <p>info@drivelux.com</p>
+                <p class="text-muted small">
+                  We usually respond within 2 hours
+                </p>
+              </div>
+            </div>
+            <div class="col-md-4 mb-4">
+              <div class="contact-card">
+                <div class="contact-icon">
+                  <i class="fas fa-comments"></i>
+                </div>
+                <h5>Live Chat</h5>
+                <p>Chat with our experts</p>
+                <a href="#" class="btn btn-primary mt-2">Start Chat</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Back to top button -->
+        <a href="#" class="back-to-top" title="Back to top">
+          <i class="fas fa-chevron-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer will be loaded here -->
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+  </body>
+</html>

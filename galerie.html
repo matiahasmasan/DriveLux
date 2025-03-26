@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Fleet - DriveLux</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .gallery-header {
+        background-color: var(--secondary-color);
+        color: white;
+        padding: 60px 0;
+        margin-bottom: 40px;
+      }
+
+      .car-gallery {
+        padding-bottom: 60px;
+      }
+
+      .car-card {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+        background-color: white;
+      }
+
+      .car-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .car-img-container {
+        height: 220px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .car-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .car-card:hover .car-img {
+        transform: scale(1.05);
+      }
+
+      .car-category {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background-color: var(--primary-color);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .car-details {
+        padding: 20px;
+      }
+
+      .car-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .car-specs {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        font-size: 14px;
+        color: var(--secondary-color);
+      }
+
+      .spec-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .car-price {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid #eee;
+        padding-top: 15px;
+        margin-top: 5px;
+      }
+
+      .price-amount {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--secondary-color);
+      }
+
+      .price-period {
+        font-size: 14px;
+        color: #777;
+      }
+
+      .filter-container {
+        margin-bottom: 30px;
+      }
+
+      .filter-btn {
+        margin-right: 8px;
+        margin-bottom: 10px;
+        border-radius: 20px;
+        padding: 8px 15px;
+        font-size: 14px;
+      }
+
+      .filter-btn.active {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: white;
+      }
+      .favorite-btn {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border: none;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .favorite-btn:hover {
+        background-color: white;
+        transform: scale(1.1);
+      }
+
+      .favorite-btn .fa-heart {
+        color: var(--primary-color);
+        font-size: 18px;
+      }
+
+      .favorite-btn.active .fa-heart {
+        font-weight: 900;
+      }
+
+      /* Add a notification badge to the navbar favorite icon */
+      .favorite-count {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: var(--primary-color);
+        color: white;
+        font-size: 10px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar will be loaded here -->
+    <div id="navbar-container"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-content">
+      <!-- Gallery Header -->
+      <div class="gallery-header">
+        <div class="container">
+          <h1 class="text-center mb-2">Our Luxury Fleet</h1>
+          <p class="text-center lead">
+            Discover and reserve the perfect vehicle for your journey
+          </p>
+        </div>
+      </div>
+
+      <!-- Car Gallery -->
+      <div class="container car-gallery">
+        <!-- Filter Buttons -->
+        <div class="filter-container text-center">
+          <button class="btn btn-outline-secondary filter-btn active">
+            All Vehicles
+          </button>
+          <button class="btn btn-outline-secondary filter-btn">
+            Sports Cars
+          </button>
+          <button class="btn btn-outline-secondary filter-btn">
+            Luxury Sedans
+          </button>
+          <button class="btn btn-outline-secondary filter-btn">SUVs</button>
+          <button class="btn btn-outline-secondary filter-btn">
+            Convertibles
+          </button>
+        </div>
+
+        <!-- Car Grid -->
+        <div class="row g-4">
+          <!-- Car 1 -->
+          <div class="col-lg-4 col-md-6">
+            <div class="car-card">
+              <div class="car-img-container">
+                <img
+                  src="images/lambo.png"
+                  alt="Lamborghini Huracán"
+                  class="car-img"
+                />
+                <button
+                  class="favorite-btn"
+                  data-id="lamborghini-huracan"
+                  data-title="Lamborghini Huracán"
+                  data-img="images/lambo.png"
+                  data-price="899"
+                  data-category="Sports"
+                >
+                  <i class="far fa-heart"></i>
+                </button>
+                <div class="car-category">Sports</div>
+              </div>
+              <div class="car-details">
+                <h3 class="car-title">Lamborghini Huracán</h3>
+                <div class="car-specs">
+                  <div class="spec-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>610 HP</span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Auto</span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-gas-pump"></i>
+                    <span>Premium</span>
+                  </div>
+                </div>
+                <p class="car-description">
+                  Experience the thrill of a naturally aspirated V10 engine and
+                  the precise handling of this Italian masterpiece.
+                </p>
+                <div class="car-price">
+                  <div>
+                    <span class="price-amount">$899</span>
+                    <span class="price-period">/ day</span>
+                  </div>
+                  <a
+                    href="car_details.html?id=lamborghini-huracan"
+                    class="btn btn-primary"
+                    >View Details</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Car 2 -->
+          <div class="col-lg-4 col-md-6">
+            <div class="car-card">
+              <div class="car-img-container">
+                <img
+                  src="images/ferrari.png"
+                  alt="Ferrari 488 Spider"
+                  class="car-img"
+                />
+                <button
+                  class="favorite-btn"
+                  data-id="lamborghini-huracan"
+                  data-title="Lamborghini Huracán"
+                  data-img="images/lambo.png"
+                  data-price="899"
+                  data-category="Sports"
+                >
+                  <i class="far fa-heart"></i>
+                </button>
+                <div class="car-category">Convertible</div>
+              </div>
+              <div class="car-details">
+                <h3 class="car-title">Ferrari 488 Spider</h3>
+                <div class="car-specs">
+                  <div class="spec-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>670 HP</span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Auto</span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-gas-pump"></i>
+                    <span>Premium</span>
+                  </div>
+                </div>
+                <p class="car-description">
+                  Feel the wind in your hair and the power of a twin-turbo V8
+                  with this stunning convertible Ferrari.
+                </p>
+                <div class="car-price">
+                  <div>
+                    <span class="price-amount">$949</span>
+                    <span class="price-period">/ day</span>
+                  </div>
+                  <a
+                    href="car_details.html?id=ferrari-488-spider"
+                    class="btn btn-primary"
+                    >View Details</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Car 3 -->
+          <div class="col-lg-4 col-md-6">
+            <div class="car-card">
+              <div class="car-img-container">
+                <img
+                  src="images/sclass.webp"
+                  alt="Mercedes-Benz S-Class"
+                  class="car-img"
+                />
+                <button
+                  class="favorite-btn"
+                  data-id="lamborghini-huracan"
+                  data-title="Lamborghini Huracán"
+                  data-img="images/lambo.png"
+                  data-price="899"
+                  data-category="Sports"
+                >
+                  <i class="far fa-heart"></i>
+                </button>
+                <div class="car-category">Luxury</div>
+              </div>
+              <div class="car-details">
+                <h3 class="car-title">Mercedes-Benz S-Class</h3>
+                <div class="car-specs">
+                  <div class="spec-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>429 HP</span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Auto</span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-gas-pump"></i>
+                    <span>Premium</span>
+                  </div>
+                </div>
+                <p class="car-description">
+                  Unmatched luxury and comfort with cutting-edge technology for
+                  the most discerning clients.
+                </p>
+                <div class="car-price">
+                  <div>
+                    <span class="price-amount">$499</span>
+                    <span class="price-period">/ day</span>
+                  </div>
+                  <a
+                    href="car_details.html?id=mercedes-s-class"
+                    class="btn btn-primary"
+                    >View Details</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Car 4 -->
+          <div class="col-lg-4 col-md-6">
+            <div class="car-card">
+              <div class="car-img-container">
+                <img
+                  src="images/porshe.png"
+                  alt="Porsche Cayman"
+                  class="car-img"
+                />
+                <button
+                  class="favorite-btn"
+                  data-id="lamborghini-huracan"
+                  data-title="Lamborghini Huracán"
+                  data-img="images/lambo.png"
+                  data-price="899"
+                  data-category="Sports"
+                >
+                  <i class="far fa-heart"></i>
+                </button>
+                <div class="car-category">Sports</div>
+              </div>
+              <div class="car-details">
+                <h3 class="car-title">Porsche Cayman</h3>
+                <div class="car-specs">
+                  <div class="spec-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>300 HP</span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-cog"></i>
+                    <span>PDK</span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-gas-pump"></i>
+                    <span>Premium</span>
+                  </div>
+                </div>
+                <p class="car-description">
+                  Mid-engine balance and precision handling make this the
+                  perfect sports car for winding roads.
+                </p>
+                <div class="car-price">
+                  <div>
+                    <span class="price-amount">$299</span>
+                    <span class="price-period">/ day</span>
+                  </div>
+                  <a
+                    href="car_details.html?id=porsche-cayman"
+                    class="btn btn-primary"
+                    >View Details</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Car 5 -->
+          <div class="col-lg-4 col-md-6">
+            <div class="car-card">
+              <div class="car-img-container">
+                <img
+                  src="images/audi.jpg"
+                  alt="Audi A5 Cabriolet"
+                  class="car-img"
+                />
+                <button
+                  class="favorite-btn"
+                  data-id="lamborghini-huracan"
+                  data-title="Lamborghini Huracán"
+                  data-img="images/lambo.png"
+                  data-price="899"
+                  data-category="Sports"
+                >
+                  <i class="far fa-heart"></i>
+                </button>
+                <div class="car-category">Convertible</div>
+              </div>
+              <div class="car-details">
+                <h3 class="car-title">Audi A5 Cabriolet</h3>
+                <div class="car-specs">
+                  <div class="spec-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>248 HP</span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Auto</span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-gas-pump"></i>
+                    <span>Regular</span>
+                  </div>
+                </div>
+                <p class="car-description">
+                  Enjoy open-air luxury with this sophisticated convertible
+                  that's perfect for coastal drives.
+                </p>
+                <div class="car-price">
+                  <div>
+                    <span class="price-amount">$189</span>
+                    <span class="price-period">/ day</span>
+                  </div>
+                  <a
+                    href="car_details.html?id=audi-a5-cabriolet"
+                    class="btn btn-primary"
+                    >View Details</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Car 6 -->
+          <div class="col-lg-4 col-md-6">
+            <div class="car-card">
+              <div class="car-img-container">
+                <img src="images/bmw.png" alt="BMW 3 Series" class="car-img" />
+                <button
+                  class="favorite-btn"
+                  data-id="lamborghini-huracan"
+                  data-title="Lamborghini Huracán"
+                  data-img="images/lambo.png"
+                  data-price="899"
+                  data-category="Sports"
+                >
+                  <i class="far fa-heart"></i>
+                </button>
+                <div class="car-category">Luxury</div>
+              </div>
+              <div class="car-details">
+                <h3 class="car-title">BMW 3 Series</h3>
+                <div class="car-specs">
+                  <div class="spec-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>255 HP</span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Auto</span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-gas-pump"></i>
+                    <span>Premium</span>
+                  </div>
+                </div>
+                <p class="car-description">
+                  The perfect balance of luxury and driving dynamics in a sporty
+                  sedan for business or pleasure.
+                </p>
+                <div class="car-price">
+                  <div>
+                    <span class="price-amount">$149</span>
+                    <span class="price-period">/ day</span>
+                  </div>
+                  <a
+                    href="car_details.html?id=bmw-3-series"
+                    class="btn btn-primary"
+                    >View Details</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Car 7 -->
+          <div class="col-lg-4 col-md-6">
+            <div class="car-card">
+              <div class="car-img-container">
+                <img
+                  src="images/jeep.png"
+                  alt="Jeep Wrangler"
+                  class="car-img"
+                />
+                <button
+                  class="favorite-btn"
+                  data-id="lamborghini-huracan"
+                  data-title="Lamborghini Huracán"
+                  data-img="images/lambo.png"
+                  data-price="899"
+                  data-category="Sports"
+                >
+                  <i class="far fa-heart"></i>
+                </button>
+                <div class="car-category">SUV</div>
+              </div>
+              <div class="car-details">
+                <h3 class="car-title">Jeep Wrangler</h3>
+                <div class="car-specs">
+                  <div class="spec-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>285 HP</span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Auto</span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-gas-pump"></i>
+                    <span>Regular</span>
+                  </div>
+                </div>
+                <p class="car-description">
+                  Adventure awaits with this iconic off-roader that's perfect
+                  for beach trips and mountain trails.
+                </p>
+                <div class="car-price">
+                  <div>
+                    <span class="price-amount">$129</span>
+                    <span class="price-period">/ day</span>
+                  </div>
+                  <a
+                    href="car_details.html?id=jeep-wrangler"
+                    class="btn btn-primary"
+                    >View Details</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Car 8 -->
+          <div class="col-lg-4 col-md-6">
+            <div class="car-card">
+              <div class="car-img-container">
+                <img
+                  src="images/tesla.png"
+                  alt="Tesla Model 3"
+                  class="car-img"
+                />
+                <button
+                  class="favorite-btn"
+                  data-id="lamborghini-huracan"
+                  data-title="Lamborghini Huracán"
+                  data-img="images/lambo.png"
+                  data-price="899"
+                  data-category="Sports"
+                >
+                  <i class="far fa-heart"></i>
+                </button>
+                <div class="car-category">Electric</div>
+              </div>
+              <div class="car-details">
+                <h3 class="car-title">Tesla Model 3</h3>
+                <div class="car-specs">
+                  <div class="spec-item">
+                    <i class="fas fa-bolt"></i>
+                    <span>283 HP</span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Auto</span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-charging-station"></i>
+                    <span>Electric</span>
+                  </div>
+                </div>
+                <p class="car-description">
+                  Experience the future with zero emissions and instant
+                  acceleration in this stylish electric sedan.
+                </p>
+                <div class="car-price">
+                  <div>
+                    <span class="price-amount">$159</span>
+                    <span class="price-period">/ day</span>
+                  </div>
+                  <a
+                    href="car_details.html?id=tesla-model-3"
+                    class="btn btn-primary"
+                    >View Details</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Car 9 -->
+          <div class="col-lg-4 col-md-6">
+            <div class="car-card">
+              <div class="car-img-container">
+                <img
+                  src="images/mini.png"
+                  alt="MINI Cooper S"
+                  class="car-img"
+                />
+                <button
+                  class="favorite-btn"
+                  data-id="lamborghini-huracan"
+                  data-title="Lamborghini Huracán"
+                  data-img="images/lambo.png"
+                  data-price="899"
+                  data-category="Sports"
+                >
+                  <i class="far fa-heart"></i>
+                </button>
+                <div class="car-category">Compact</div>
+              </div>
+              <div class="car-details">
+                <h3 class="car-title">MINI Cooper S</h3>
+                <div class="car-specs">
+                  <div class="spec-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>189 HP</span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Manual</span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-gas-pump"></i>
+                    <span>Premium</span>
+                  </div>
+                </div>
+                <p class="car-description">
+                  Fun-to-drive compact car with go-kart handling that's perfect
+                  for urban exploration.
+                </p>
+                <div class="car-price">
+                  <div>
+                    <span class="price-amount">$99</span>
+                    <span class="price-period">/ day</span>
+                  </div>
+                  <a
+                    href="car_details.html?id=mini-cooper-s"
+                    class="btn btn-primary"
+                    >View Details</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer will be loaded here -->
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize favorites from localStorage
+        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+        // Update favorite buttons to show active state
+        updateFavoriteButtons();
+        updateFavoriteCount();
+
+        // Add event listeners to favorite buttons
+        document.querySelectorAll(".favorite-btn").forEach((btn) => {
+          btn.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const carId = this.getAttribute("data-id");
+            const carTitle = this.getAttribute("data-title");
+            const carImg = this.getAttribute("data-img");
+            const carPrice = this.getAttribute("data-price");
+            const carCategory = this.getAttribute("data-category");
+
+            const carIndex = favorites.findIndex((car) => car.id === carId);
+
+            if (carIndex === -1) {
+              // Add to favorites
+              favorites.push({
+                id: carId,
+                title: carTitle,
+                img: carImg,
+                price: carPrice,
+                category: carCategory,
+              });
+              this.classList.add("active");
+              this.querySelector("i").classList.remove("far");
+              this.querySelector("i").classList.add("fas");
+            } else {
+              // Remove from favorites
+              favorites.splice(carIndex, 1);
+              this.classList.remove("active");
+              this.querySelector("i").classList.remove("fas");
+              this.querySelector("i").classList.add("far");
+            }
+
+            // Save to localStorage
+            localStorage.setItem("favorites", JSON.stringify(favorites));
+
+            // Update favorite count in navbar
+            updateFavoriteCount();
+          });
+        });
+
+        function updateFavoriteButtons() {
+          document.querySelectorAll(".favorite-btn").forEach((btn) => {
+            const carId = btn.getAttribute("data-id");
+            if (favorites.some((car) => car.id === carId)) {
+              btn.classList.add("active");
+              btn.querySelector("i").classList.remove("far");
+              btn.querySelector("i").classList.add("fas");
+            }
+          });
+        }
+
+        function updateFavoriteCount() {
+          const countElement = document.getElementById("favorite-count");
+          if (countElement) {
+            countElement.textContent = favorites.length;
+            countElement.style.display = favorites.length > 0 ? "flex" : "none";
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

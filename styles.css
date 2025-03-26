@@ -1,0 +1,128 @@
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2c3e50;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0;
+}
+
+/* Hero Section */
+.hero {
+  height: 80vh;
+  background: #2c3e50;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.hero-content {
+  max-width: 800px;
+}
+
+/* Car Cards */
+.car-section {
+  background-color: #f5f7fa;
+  padding: 80px 0;
+}
+
+.car-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+}
+
+.car-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.car-img {
+  height: 200px;
+  object-fit: cover;
+}
+
+.car-specs {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  font-size: 14px;
+  color: var(--secondary-color);
+}
+
+.spec-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Features Section */
+.features-section {
+  padding: 80px 0;
+}
+
+.feature-box {
+  text-align: center;
+  padding: 30px 15px;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.feature-box:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+}
+
+.main-content {
+  flex: 1 0 auto;
+  width: 100%;
+  padding-bottom: 20px; /* Base padding for all screens */
+}
+
+/* Footer Styling (base styles, full styling in JS) */
+footer {
+  background-color: var(--dark-color);
+  color: white;
+  width: 100%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1100px) {
+  .main-content {
+    padding-bottom: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding-bottom: 60px;
+  }
+}
+
+/* Navbar - minimal styles, most styling in JS */
+.navbar-brand img {
+  height: 40px;
+}
+
+/* Button Styling */
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: #2980b9;
+  border-color: #2980b9;
+}

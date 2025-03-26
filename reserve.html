@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Complete Reservation - DriveLux</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .reservation-header {
+        background-color: var(--secondary-color);
+        color: white;
+        padding: 40px 0;
+        margin-bottom: 40px;
+      }
+
+      .reservation-section {
+        padding-bottom: 60px;
+      }
+
+      .car-summary {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+      }
+
+      .car-summary-header {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 15px;
+      }
+
+      .car-summary-body {
+        padding: 20px;
+      }
+
+      .car-image {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+
+      .date-summary {
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #f8f9fa;
+        border-radius: 4px;
+      }
+
+      .addon-item {
+        padding: 15px;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        transition: all 0.3s ease;
+      }
+
+      .addon-item:hover {
+        border-color: var(--primary-color);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .addon-item .form-check-input:checked ~ .form-check-label {
+        font-weight: 600;
+      }
+
+      .addon-price {
+        font-weight: 600;
+        color: var(--secondary-color);
+      }
+
+      .payment-method {
+        padding: 20px;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .payment-method:hover {
+        border-color: var(--primary-color);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .payment-method.selected {
+        border-color: var(--primary-color);
+        background-color: rgba(52, 152, 219, 0.05);
+      }
+
+      .payment-icon {
+        font-size: 24px;
+        color: var(--primary-color);
+        margin-right: 15px;
+      }
+
+      .payment-details {
+        display: none;
+        padding-top: 15px;
+        border-top: 1px solid #dee2e6;
+        margin-top: 15px;
+      }
+
+      .payment-method.selected .payment-details {
+        display: block;
+      }
+
+      .total-section {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 30px;
+      }
+
+      .total-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #dee2e6;
+      }
+
+      .total-row:last-child {
+        border-bottom: none;
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--secondary-color);
+      }
+
+      @media (max-width: 768px) {
+        .order-summary {
+          margin-top: 40px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar will be loaded here -->
+    <div id="navbar-container"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-content">
+      <!-- Reservation Header -->
+      <div class="reservation-header">
+        <div class="container">
+          <h1 class="text-center mb-2">Complete Your Reservation</h1>
+          <p class="text-center lead">
+            You're just a few steps away from experiencing luxury
+          </p>
+        </div>
+      </div>
+
+      <!-- Reservation Section -->
+      <div class="container reservation-section">
+        <div class="row">
+          <div class="col-lg-8">
+            <!-- Steps Navigation -->
+            <ul class="nav nav-pills nav-justified mb-4">
+              <li class="nav-item">
+                <a class="nav-link disabled">1. Car Selection</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active">2. Extras & Payment</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled">3. Confirmation</a>
+              </li>
+            </ul>
+
+            <!-- Premium Add-ons -->
+            <div class="mb-5">
+              <h3 class="mb-3">Premium Equipment</h3>
+              <p class="text-muted mb-4">
+                Enhance your driving experience with our premium add-ons:
+              </p>
+
+              <div class="addon-item">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="gps-addon"
+                    data-price="15"
+                  />
+                  <label
+                    class="form-check-label d-flex justify-content-between align-items-center"
+                    for="gps-addon"
+                  >
+                    <div>
+                      <span class="d-block fw-semibold"
+                        >Premium GPS Navigation</span
+                      >
+                      <span class="text-muted"
+                        >High-precision GPS with real-time traffic updates and
+                        points of interest</span
+                      >
+                    </div>
+                    <span class="addon-price">$15/day</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="addon-item">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="child-seat-addon"
+                    data-price="12"
+                  />
+                  <label
+                    class="form-check-label d-flex justify-content-between align-items-center"
+                    for="child-seat-addon"
+                  >
+                    <div>
+                      <span class="d-block fw-semibold">Child Safety Seat</span>
+                      <span class="text-muted"
+                        >High-quality child seat suitable for children from 9
+                        months to 4 years</span
+                      >
+                    </div>
+                    <span class="addon-price">$12/day</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="addon-item">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="wifi-addon"
+                    data-price="18"
+                  />
+                  <label
+                    class="form-check-label d-flex justify-content-between align-items-center"
+                    for="wifi-addon"
+                  >
+                    <div>
+                      <span class="d-block fw-semibold"
+                        >In-Car WiFi Hotspot</span
+                      >
+                      <span class="text-muted"
+                        >High-speed internet access for up to 10 devices with
+                        unlimited data</span
+                      >
+                    </div>
+                    <span class="addon-price">$18/day</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="addon-item">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="driver-addon"
+                    data-price="250"
+                  />
+                  <label
+                    class="form-check-label d-flex justify-content-between align-items-center"
+                    for="driver-addon"
+                  >
+                    <div>
+                      <span class="d-block fw-semibold"
+                        >Professional Driver</span
+                      >
+                      <span class="text-muted"
+                        >Experienced chauffeur for a luxurious, hands-free
+                        experience</span
+                      >
+                    </div>
+                    <span class="addon-price">$250/day</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="addon-item">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="insurance-addon"
+                    data-price="45"
+                  />
+                  <label
+                    class="form-check-label d-flex justify-content-between align-items-center"
+                    for="insurance-addon"
+                  >
+                    <div>
+                      <span class="d-block fw-semibold"
+                        >Premium Insurance Package</span
+                      >
+                      <span class="text-muted"
+                        >Zero deductible, full coverage insurance for complete
+                        peace of mind</span
+                      >
+                    </div>
+                    <span class="addon-price">$45/day</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Payment Options -->
+            <div class="mb-5">
+              <h3 class="mb-3">Payment Method</h3>
+              <p class="text-muted mb-4">
+                Choose your preferred payment method:
+              </p>
+
+              <div
+                class="payment-method"
+                onclick="selectPayment('credit-card')"
+              >
+                <div class="d-flex align-items-center">
+                  <input
+                    type="radio"
+                    name="payment"
+                    id="credit-card-payment"
+                    checked
+                  />
+                  <i class="fas fa-credit-card payment-icon"></i>
+                  <div>
+                    <span class="fw-semibold">Credit or Debit Card</span>
+                    <span class="d-block text-muted small"
+                      >Visa, MasterCard, American Express, Discover</span
+                    >
+                  </div>
+                </div>
+
+                <div class="payment-details">
+                  <div class="row g-3">
+                    <div class="col-12">
+                      <label for="card-number" class="form-label"
+                        >Card Number</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="card-number"
+                        placeholder="1234 5678 9012 3456"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="expiry-date" class="form-label"
+                        >Expiry Date</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="expiry-date"
+                        placeholder="MM/YY"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="cvv" class="form-label">CVV</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="cvv"
+                        placeholder="123"
+                      />
+                    </div>
+                    <div class="col-12">
+                      <label for="card-name" class="form-label"
+                        >Name on Card</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="card-name"
+                        placeholder="John Doe"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="payment-method mt-3" onclick="selectPayment('cash')">
+                <div class="d-flex align-items-center">
+                  <input type="radio" name="payment" id="cash-payment" />
+                  <i class="fas fa-money-bill-wave payment-icon"></i>
+                  <div>
+                    <span class="fw-semibold">Cash Payment</span>
+                    <span class="d-block text-muted small"
+                      >Pay with cash at time of pickup</span
+                    >
+                  </div>
+                </div>
+
+                <div class="payment-details">
+                  <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Please note that a valid credit card is still required as a
+                    security deposit, even though the final payment will be made
+                    in cash at the time of pickup.
+                  </div>
+                  <div class="row g-3">
+                    <div class="col-12">
+                      <label for="deposit-card-number" class="form-label"
+                        >Deposit Card Number</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="deposit-card-number"
+                        placeholder="1234 5678 9012 3456"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="deposit-expiry-date" class="form-label"
+                        >Expiry Date</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="deposit-expiry-date"
+                        placeholder="MM/YY"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="deposit-cvv" class="form-label">CVV</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="deposit-cvv"
+                        placeholder="123"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Personal Information -->
+            <div class="mb-5">
+              <h3 class="mb-3">Personal Information</h3>
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="first-name" class="form-label">First Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="first-name"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="last-name" class="form-label">Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="last-name"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="phone" class="form-label">Phone Number</label>
+                  <input type="tel" class="form-control" id="phone" required />
+                </div>
+                <div class="col-12">
+                  <label for="address" class="form-label">Address</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="address"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="license-number" class="form-label"
+                    >Driver's License Number</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="license-number"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="license-expiry" class="form-label"
+                    >License Expiry Date</label
+                  >
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="license-expiry"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Terms Agreement -->
+            <div class="mb-4">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="terms-agreement"
+                  required
+                />
+                <label class="form-check-label" for="terms-agreement">
+                  I agree to the
+                  <a href="terms.html" target="_blank">Terms and Conditions</a>
+                  and <a href="privacy.html" target="_blank">Privacy Policy</a>
+                </label>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="btn btn-primary btn-lg"
+              onclick="completeReservation()"
+            >
+              Complete Reservation
+            </button>
+          </div>
+
+          <div class="col-lg-4 order-summary">
+            <!-- Order Summary -->
+            <div class="car-summary">
+              <div class="car-summary-header">
+                <h4 class="mb-0">Reservation Summary</h4>
+              </div>
+              <div class="car-summary-body">
+                <div class="text-center mb-3">
+                  <img
+                    src="images/lambo.png"
+                    alt="Lamborghini Huracán"
+                    class="car-image"
+                  />
+                </div>
+                <h5 id="car-name">Lamborghini Huracán</h5>
+                <div class="date-summary">
+                  <div class="d-flex justify-content-between">
+                    <span>Pickup:</span>
+                    <span id="pickup-date-display">March 28, 2025</span>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <span>Return:</span>
+                    <span id="return-date-display">March 31, 2025</span>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <span>Location:</span>
+                    <span id="location-display">Downtown Branch</span>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <span>Duration:</span>
+                    <span id="duration-display">3 days</span>
+                  </div>
+                </div>
+
+                <hr />
+
+                <div class="total-section">
+                  <div class="total-row">
+                    <span>Base Rate</span>
+                    <span id="base-rate">$899 × 3 days</span>
+                  </div>
+                  <div class="total-row">
+                    <span>Base Total</span>
+                    <span id="base-total">$2,697.00</span>
+                  </div>
+                  <div id="addons-container">
+                    <!-- Dynamically added addons will appear here -->
+                  </div>
+                  <div class="total-row">
+                    <span>Tax</span>
+                    <span id="tax-amount">$161.82</span>
+                  </div>
+                  <div class="total-row">
+                    <span>Total</span>
+                    <span id="total-amount">$2,858.82</span>
+                  </div>
+                </div>
+
+                <div class="alert alert-info small">
+                  <i class="fas fa-info-circle me-2"></i>
+                  A security deposit of $1,000 will be held on your card and
+                  released after the vehicle is returned in good condition.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer will be loaded here -->
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+
+    <script>
+      // Get URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const carId = urlParams.get("car");
+      const pickupDate = urlParams.get("pickup");
+      const returnDate = urlParams.get("return");
+      const location = urlParams.get("location");
+
+      // Set default values for demonstration
+      document.getElementById("pickup-date-display").textContent =
+        pickupDate || "March 28, 2025";
+      document.getElementById("return-date-display").textContent =
+        returnDate || "March 31, 2025";
+      document.getElementById("location-display").textContent =
+        location || "Downtown Branch";
+      document.getElementById("duration-display").textContent = "3 days";
+
+      // Car data can be fetched from server or hardcoded for demo
+      const carData = {
+        "lamborghini-huracan": {
+          name: "Lamborghini Huracán",
+          dailyRate: 899,
+          image: "images/lambo.png",
+        },
+        "ferrari-488-spider": {
+          name: "Ferrari 488 Spider",
+          dailyRate: 949,
+          image: "images/ferrari.png",
+        },
+        "mercedes-s-class": {
+          name: "Mercedes-Benz S-Class",
+          dailyRate: 499,
+          image: "images/sclass.webp",
+        },
+        // Add more cars as needed
+      };
+
+      // Select a default car for demo purposes
+      const selectedCar = carData[carId] || carData["lamborghini-huracan"];
+      document.getElementById("car-name").textContent = selectedCar.name;
+      document.querySelector(".car-image").src = selectedCar.image;
+
+      // Calculate base price
+      const duration = 3; // Default to 3 days for demo
+      const baseRate = selectedCar.dailyRate;
+      const baseTotal = baseRate * duration;
+
+      document.getElementById(
+        "base-rate"
+      ).textContent = `$${baseRate} × ${duration} days`;
+      document.getElementById("base-total").textContent = `$${baseTotal.toFixed(
+        2
+      )}`;
+
+      // Update totals when addons are selected
+      function updateTotals() {
+        let addonTotal = 0;
+        let addonHtml = "";
+
+        // Get selected addons
+        document
+          .querySelectorAll('.form-check-input[type="checkbox"]:checked')
+          .forEach((checkbox) => {
+            const addonPrice = parseFloat(checkbox.dataset.price);
+            const addonName =
+              checkbox.nextElementSibling.querySelector(
+                ".fw-semibold"
+              ).textContent;
+            const addonLineTotal = addonPrice * duration;
+
+            addonTotal += addonLineTotal;
+
+            addonHtml += `
+                    <div class="total-row">
+                        <span>${addonName}</span>
+                        <span>$${addonLineTotal.toFixed(2)}</span>
+                    </div>
+                `;
+          });
+
+        // Update the addons container
+        document.getElementById("addons-container").innerHTML = addonHtml;
+
+        // Calculate tax and total
+        const subtotal = baseTotal + addonTotal;
+        const taxRate = 0.06; // 6% tax rate
+        const taxAmount = subtotal * taxRate;
+        const totalAmount = subtotal + taxAmount;
+
+        document.getElementById(
+          "tax-amount"
+        ).textContent = `$${taxAmount.toFixed(2)}`;
+        document.getElementById(
+          "total-amount"
+        ).textContent = `$${totalAmount.toFixed(2)}`;
+      }
+
+      // Add event listeners to checkboxes
+      document
+        .querySelectorAll('.form-check-input[type="checkbox"]')
+        .forEach((checkbox) => {
+          checkbox.addEventListener("change", updateTotals);
+        });
+
+      // Function to select payment method
+      function selectPayment(method) {
+        document.querySelectorAll(".payment-method").forEach((el) => {
+          el.classList.remove("selected");
+        });
+
+        if (method === "credit-card") {
+          document.getElementById("credit-card-payment").checked = true;
+          document
+            .getElementById("credit-card-payment")
+            .closest(".payment-method")
+            .classList.add("selected");
+        } else if (method === "cash") {
+          document.getElementById("cash-payment").checked = true;
+          document
+            .getElementById("cash-payment")
+            .closest(".payment-method")
+            .classList.add("selected");
+        }
+      }
+
+      // Initialize selected payment method
+      selectPayment("credit-card");
+
+      // Function to handle reservation submission
+      function completeReservation() {
+        // Basic form validation
+        if (!document.getElementById("terms-agreement").checked) {
+          alert("Please agree to the Terms and Conditions to proceed.");
+          return;
+        }
+
+        // Simulate form submission - in a real app, this would send data to server
+        alert(
+          "Your reservation has been completed successfully! Check your email for confirmation details."
+        );
+
+        // Redirect to confirmation page - uncomment in real implementation
+        // window.location.href = 'confirmation.html?id=12345';
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Details - DriveLux</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .car-details-header {
+        background-color: var(--secondary-color);
+        color: white;
+        padding: 60px 0;
+        margin-bottom: 40px;
+      }
+
+      .car-details-section {
+        padding-bottom: 60px;
+      }
+
+      .car-image-gallery {
+        margin-bottom: 30px;
+      }
+
+      .main-image {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 15px;
+      }
+
+      .thumbnail-container {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 10px;
+      }
+
+      .thumbnail {
+        width: 100px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 4px;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+      }
+
+      .thumbnail:hover,
+      .thumbnail.active {
+        opacity: 1;
+      }
+
+      .car-specs-card {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+      }
+
+      .spec-group {
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .spec-group:last-child {
+        border-bottom: none;
+      }
+
+      .spec-title {
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: var(--secondary-color);
+      }
+
+      .spec-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+
+      .spec-icon {
+        width: 40px;
+        color: var(--primary-color);
+      }
+
+      .booking-card {
+        position: sticky;
+        top: 20px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .booking-header {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 15px;
+      }
+
+      .booking-body {
+        padding: 20px;
+      }
+
+      .price-display {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--secondary-color);
+        margin-bottom: 20px;
+      }
+
+      .price-period {
+        font-size: 16px;
+        font-weight: normal;
+        color: #777;
+      }
+
+      .booking-form label {
+        font-weight: 500;
+      }
+
+      .features-list {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .features-list li {
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .features-list li:last-child {
+        border-bottom: none;
+      }
+
+      .features-list i {
+        color: var(--primary-color);
+        margin-right: 10px;
+      }
+
+      .similar-cars {
+        margin-top: 60px;
+      }
+
+      @media (max-width: 768px) {
+        .main-image {
+          height: 300px;
+        }
+
+        .booking-card {
+          position: static;
+          margin-top: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar will be loaded here -->
+    <div id="navbar-container"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-content">
+      <div id="car-details-content">
+        <!-- Content will be dynamically loaded -->
+        <div class="text-center py-5">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <p class="mt-3">Loading car details...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer will be loaded here -->
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+
+    <script>
+      // Sample car data - In a real implementation, this would come from a database or API
+      const carData = {
+        "lamborghini-huracan": {
+          name: "Lamborghini Huracán",
+          category: "Sports",
+          price: 899,
+          mainImage: "images/lambo.png",
+          galleryImages: [
+            "images/lambo-side.avif",
+            "images/lambo-interior.avif",
+            "images/lambo-rear.avif",
+          ],
+          description:
+            "The Lamborghini Huracán is the perfect combination of technology and design. With its sharp, iconic lines, aerodynamic efficiency and powerful 5.2L V10 engine that delivers 610 horsepower, this supercar offers an unparalleled driving experience that will satisfy even the most demanding drivers.",
+          specifications: {
+            performance: [
+              { icon: "fa-tachometer-alt", label: "Engine", value: "5.2L V10" },
+              { icon: "fa-horse", label: "Horsepower", value: "610 HP" },
+              {
+                icon: "fa-gauge-high",
+                label: "0-60 mph",
+                value: "2.9 seconds",
+              },
+              { icon: "fa-gauge", label: "Top Speed", value: "201 mph" },
+            ],
+            features: [
+              {
+                icon: "fa-cog",
+                label: "Transmission",
+                value: "7-speed Dual-Clutch",
+              },
+              { icon: "fa-gas-pump", label: "Fuel Type", value: "Premium" },
+              {
+                icon: "fa-road",
+                label: "Drive Type",
+                value: "All-Wheel Drive",
+              },
+              { icon: "fa-car", label: "Body Style", value: "2-door Coupe" },
+            ],
+            dimensions: [
+              {
+                icon: "fa-users",
+                label: "Seating Capacity",
+                value: "2 passengers",
+              },
+              {
+                icon: "fa-suitcase",
+                label: "Luggage Space",
+                value: "1 small bag",
+              },
+              { icon: "fa-arrows-alt-h", label: "Length", value: "4.5 meters" },
+              {
+                icon: "fa-ruler-vertical",
+                label: "Height",
+                value: "1.2 meters",
+              },
+            ],
+          },
+          features: [
+            "Carbon Ceramic Brakes",
+            "Launch Control",
+            "Dynamic Steering",
+            "Carbon Fiber Interior",
+            "Premium Sound System",
+            "Bluetooth Connectivity",
+            "Navigation System",
+            "Reverse Camera",
+          ],
+          similarCars: [
+            { id: "ferrari-488-spider", name: "Ferrari 488 Spider" },
+            { id: "porsche-cayman", name: "Porsche Cayman" },
+            { id: "audi-r8", name: "Audi R8" },
+          ],
+        },
+        // Additional car data would be defined here
+      };
+
+      // Function to get URL parameters
+      function getUrlParam(param) {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        return urlParams.get(param);
+      }
+
+      // Function to load car details
+      function loadCarDetails() {
+        const carId = getUrlParam("id");
+
+        // If no car ID is specified or car doesn't exist, show error
+        if (!carId || !carData[carId]) {
+          document.getElementById("car-details-content").innerHTML = `
+                    <div class="container text-center py-5">
+                        <div class="alert alert-danger" role="alert">
+                            <h4 class="alert-heading">Car Not Found</h4>
+                            <p>Sorry, the requested car details could not be found.</p>
+                            <hr>
+                            <p class="mb-0">Please return to our <a href="fleet.html" class="alert-link">fleet page</a> to view available vehicles.</p>
+                        </div>
+                    </div>
+                `;
+          return;
+        }
+
+        const car = carData[carId];
+
+        // Build the car details HTML
+        let html = `
+                <!-- Car Details Header -->
+                <div class="car-details-header">
+                    <div class="container">
+                        <h1 class="text-center mb-2">${car.name}</h1>
+                        <p class="text-center lead">
+                            <span class="badge bg-primary">${
+                              car.category
+                            }</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Car Details Section -->
+                <div class="container car-details-section">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <!-- Car Image Gallery -->
+                            <div class="car-image-gallery">
+                                <img src="${car.mainImage}" alt="${
+          car.name
+        }" class="main-image" id="main-car-image">
+                                <div class="thumbnail-container">
+                                    <img src="${car.mainImage}" alt="${
+          car.name
+        }" class="thumbnail active" onclick="changeMainImage(this)">
+                                    ${car.galleryImages
+                                      .map(
+                                        (img) =>
+                                          `<img src="${img}" alt="${car.name}" class="thumbnail" onclick="changeMainImage(this)">`
+                                      )
+                                      .join("")}
+                                </div>
+                            </div>
+
+                            <!-- Car Description -->
+                            <div class="mb-4">
+                                <h3>About this ${car.name}</h3>
+                                <p>${car.description}</p>
+                            </div>
+
+                            <!-- Car Specifications -->
+                            <div class="car-specs-card mb-4">
+                                <div class="spec-group">
+                                    <h4 class="spec-title">Performance</h4>
+                                    <div class="row">
+                                        ${car.specifications.performance
+                                          .map(
+                                            (spec) => `
+                                            <div class="col-md-6">
+                                                <div class="spec-item">
+                                                    <div class="spec-icon">
+                                                        <i class="fas ${spec.icon}"></i>
+                                                    </div>
+                                                    <div>
+                                                        <div class="fw-semibold">${spec.label}</div>
+                                                        <div>${spec.value}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        `
+                                          )
+                                          .join("")}
+                                    </div>
+                                </div>
+                                <div class="spec-group">
+                                    <h4 class="spec-title">Features</h4>
+                                    <div class="row">
+                                        ${car.specifications.features
+                                          .map(
+                                            (spec) => `
+                                            <div class="col-md-6">
+                                                <div class="spec-item">
+                                                    <div class="spec-icon">
+                                                        <i class="fas ${spec.icon}"></i>
+                                                    </div>
+                                                    <div>
+                                                        <div class="fw-semibold">${spec.label}</div>
+                                                        <div>${spec.value}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        `
+                                          )
+                                          .join("")}
+                                    </div>
+                                </div>
+                                <div class="spec-group">
+                                    <h4 class="spec-title">Dimensions & Capacity</h4>
+                                    <div class="row">
+                                        ${car.specifications.dimensions
+                                          .map(
+                                            (spec) => `
+                                            <div class="col-md-6">
+                                                <div class="spec-item">
+                                                    <div class="spec-icon">
+                                                        <i class="fas ${spec.icon}"></i>
+                                                    </div>
+                                                    <div>
+                                                        <div class="fw-semibold">${spec.label}</div>
+                                                        <div>${spec.value}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        `
+                                          )
+                                          .join("")}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4">
+                            <!-- Booking Card -->
+                            <div class="booking-card">
+                                <div class="booking-header">
+                                    <h4 class="mb-0">Book this ${car.name}</h4>
+                                </div>
+                                <div class="booking-body">
+                                    <div class="price-display mb-4">
+                                        $${
+                                          car.price
+                                        } <span class="price-period">/ day</span>
+                                    </div>
+                                    
+                                    <form class="booking-form">
+                                        <div class="mb-3">
+                                            <label for="pickup-date" class="form-label">Pickup Date</label>
+                                            <input type="date" class="form-control" id="pickup-date" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="return-date" class="form-label">Return Date</label>
+                                            <input type="date" class="form-control" id="return-date" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="pickup-location" class="form-label">Pickup Location</label>
+                                            <select class="form-select" id="pickup-location" required>
+                                                <option value="">Select location</option>
+                                                <option value="downtown">Downtown Branch</option>
+                                                <option value="airport">Airport Terminal</option>
+                                                <option value="north">North Branch</option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100" onclick="navigateToReservation(event)">Reserve Now</button>
+                                    </form>
+                                    
+                                    <hr>
+                                    
+                                    <h5>Includes:</h5>
+                                    <ul class="features-list">
+                                        ${car.features
+                                          .map(
+                                            (feature) =>
+                                              `<li><i class="fas fa-check"></i> ${feature}</li>`
+                                          )
+                                          .join("")}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Similar Cars -->
+                    <div class="similar-cars">
+                        <h3 class="mb-4">You might also like</h3>
+                        <div class="row g-4">
+                            ${car.similarCars
+                              .map(
+                                (similar) => `
+                                <div class="col-md-4">
+                                    <div class="card h-100">
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title">${similar.name}</h5>
+                                            <a href="car_details.html?id=${similar.id}" class="btn btn-outline-primary mt-3">View Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            `
+                              )
+                              .join("")}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+        document.getElementById("car-details-content").innerHTML = html;
+      }
+
+      // Function to change the main image when a thumbnail is clicked
+      function changeMainImage(thumbnail) {
+        // Update main image
+        document.getElementById("main-car-image").src = thumbnail.src;
+
+        // Update active thumbnail
+        document.querySelectorAll(".thumbnail").forEach((thumb) => {
+          thumb.classList.remove("active");
+        });
+        thumbnail.classList.add("active");
+      }
+
+      // Load car details when the page loads
+      window.addEventListener("DOMContentLoaded", loadCarDetails);
+
+      function navigateToReservation(event) {
+        event.preventDefault();
+
+        // Get car ID from URL
+        const carId = getUrlParam("id");
+
+        // Get form data
+        const pickupDate = document.getElementById("pickup-date").value;
+        const returnDate = document.getElementById("return-date").value;
+        const pickupLocation = document.getElementById("pickup-location").value;
+
+        // Basic validation
+        if (!pickupDate || !returnDate || !pickupLocation) {
+          alert("Please fill in all reservation details.");
+          return;
+        }
+
+        // Navigate to reservation page with parameters
+        window.location.href = `reserve.html?car=${carId}&pickup=${pickupDate}&return=${returnDate}&location=${pickupLocation}`;
+      }
+    </script>
+  </body>
+</html>
