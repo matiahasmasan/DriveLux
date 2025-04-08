@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DriveLux | Reviews Management</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="admin-styles.css" />
+  </head>
+  <body>
+    <!-- Navbar will be injected here -->
+    <div id="navbar-container"></div>
+
+    <div class="admin-layout">
+      <!-- Sidebar will be injected here -->
+      <div id="sidebar-container"></div>
+
+      <!-- Main Content -->
+      <div class="admin-container">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="mb-0">Customer Reviews</h2>
+          <button class="btn btn-outline-primary">
+            <i class="fas fa-file-export me-2"></i>Export Reviews
+          </button>
+        </div>
+
+        <!-- Rating Summary -->
+        <div class="admin-card mb-4">
+          <div class="admin-card-body">
+            <div class="row align-items-center">
+              <div class="col-md-3 text-center border-end">
+                <div class="display-4 fw-bold text-primary mb-0">4.8</div>
+                <div class="mb-2">
+                  <i class="fas fa-star text-warning"></i>
+                  <i class="fas fa-star text-warning"></i>
+                  <i class="fas fa-star text-warning"></i>
+                  <i class="fas fa-star text-warning"></i>
+                  <i class="fas fa-star-half-alt text-warning"></i>
+                </div>
+                <div class="text-muted">Based on 342 reviews</div>
+              </div>
+              <div class="col-md-7">
+                <div class="row mb-1 align-items-center">
+                  <div class="col-3 text-end">5 stars</div>
+                  <div class="col-7">
+                    <div class="progress" style="height: 8px">
+                      <div
+                        class="progress-bar bg-success"
+                        role="progressbar"
+                        style="width: 75%"
+                        aria-valuenow="75"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+                  </div>
+                  <div class="col-2">256</div>
+                </div>
+                <div class="row mb-1 align-items-center">
+                  <div class="col-3 text-end">4 stars</div>
+                  <div class="col-7">
+                    <div class="progress" style="height: 8px">
+                      <div
+                        class="progress-bar bg-success"
+                        role="progressbar"
+                        style="width: 17%"
+                        aria-valuenow="17"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+                  </div>
+                  <div class="col-2">58</div>
+                </div>
+                <div class="row mb-1 align-items-center">
+                  <div class="col-3 text-end">3 stars</div>
+                  <div class="col-7">
+                    <div class="progress" style="height: 8px">
+                      <div
+                        class="progress-bar bg-warning"
+                        role="progressbar"
+                        style="width: 5%"
+                        aria-valuenow="5"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+                  </div>
+                  <div class="col-2">17</div>
+                </div>
+                <div class="row mb-1 align-items-center">
+                  <div class="col-3 text-end">2 stars</div>
+                  <div class="col-7">
+                    <div class="progress" style="height: 8px">
+                      <div
+                        class="progress-bar bg-danger"
+                        role="progressbar"
+                        style="width: 2%"
+                        aria-valuenow="2"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+                  </div>
+                  <div class="col-2">7</div>
+                </div>
+                <div class="row align-items-center">
+                  <div class="col-3 text-end">1 star</div>
+                  <div class="col-7">
+                    <div class="progress" style="height: 8px">
+                      <div
+                        class="progress-bar bg-danger"
+                        role="progressbar"
+                        style="width: 1%"
+                        aria-valuenow="1"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+                  </div>
+                  <div class="col-2">4</div>
+                </div>
+              </div>
+              <div class="col-md-2 text-center border-start">
+                <div class="text-success mb-2">
+                  <i class="fas fa-thumbs-up fa-2x"></i>
+                </div>
+                <h4 class="mb-1">93%</h4>
+                <div class="text-muted small">Recommend</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="admin-card mb-4">
+          <div class="admin-card-body">
+            <div class="row g-3">
+              <div class="col-lg-3 col-md-6">
+                <label class="form-label">Search</label>
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Search reviews..."
+                  />
+                  <button class="btn btn-outline-secondary" type="button">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-6">
+                <label class="form-label">Rating</label>
+                <select class="form-select">
+                  <option value="">All Ratings</option>
+                  <option value="5">5 Stars</option>
+                  <option value="4">4 Stars</option>
+                  <option value="3">3 Stars</option>
+                  <option value="2">2 Stars</option>
+                  <option value="1">1 Star</option>
+                </select>
+              </div>
+              <div class="col-lg-2 col-md-6">
+                <label class="form-label">Status</label>
+                <select class="form-select">
+                  <option value="">All Status</option>
+                  <option value="published">Published</option>
+                  <option value="pending">Pending</option>
+                  <option value="flagged">Flagged</option>
+                </select>
+              </div>
+              <div class="col-lg-2 col-md-6">
+                <label class="form-label">Date Range</label>
+                <select class="form-select">
+                  <option value="all">All Time</option>
+                  <option value="week">This Week</option>
+                  <option value="month">This Month</option>
+                  <option value="quarter">This Quarter</option>
+                  <option value="custom">Custom Range</option>
+                </select>
+              </div>
+              <div class="col-lg-3 col-md-12 d-flex align-items-end">
+                <button class="btn btn-primary me-2">Apply Filters</button>
+                <button class="btn btn-outline-secondary">Reset</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reviews Table -->
+        <div class="admin-card mb-4">
+          <div class="admin-card-body p-0">
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="selectAll"
+                        />
+                      </div>
+                    </th>
+                    <th>Customer</th>
+                    <th>Vehicle</th>
+                    <th>Rating</th>
+                    <th>Review</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Review 1 -->
+                  <tr>
+                    <td>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" />
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <img
+                          src="/api/placeholder/32/32"
+                          class="rounded-circle me-2"
+                          alt=""
+                        />
+                        <div>
+                          <h6 class="mb-0">Nume1</h6>
+                          <small class="text-muted">Premium Member</small>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Range Rover Sport</td>
+                    <td>
+                      <div class="text-warning">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span class="ms-1 text-dark">5.0</span>
+                      </div>
+                    </td>
+                    <td>
+                      <p class="mb-0 text-truncate" style="max-width: 300px">
+                        Incredible experience! The Range Rover was immaculate
+                        and drove like a dream. The pickup and return process
+                        was quick and effortless.
+                      </p>
+                    </td>
+                    <td>Apr 2, 2025</td>
+                    <td><span class="status-badge active">Published</span></td>
+                    <td>
+                      <button
+                        class="btn btn-sm btn-outline-primary me-1"
+                        data-bs-toggle="modal"
+                        data-bs-target="#viewReviewModal"
+                      >
+                        View
+                      </button>
+                      <button class="btn btn-sm btn-outline-secondary">
+                        Reply
+                      </button>
+                    </td>
+                  </tr>
+
+                  <!-- Review 3 -->
+                  <tr>
+                    <td>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" />
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <img
+                          src="/api/placeholder/32/32"
+                          class="rounded-circle me-2"
+                          alt=""
+                        />
+                        <div>
+                          <h6 class="mb-0">Nume2</h6>
+                          <small class="text-muted">Regular customer</small>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Tesla Model S</td>
+                    <td>
+                      <div class="text-warning">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="ms-1 text-dark">4.5</span>
+                      </div>
+                    </td>
+                    <td>
+                      <p class="mb-0 text-truncate" style="max-width: 300px">
+                        My first time driving a Tesla and it was amazing! The
+                        car was charged and ready to go. Staff was very helpful
+                        in explaining all the features.
+                      </p>
+                    </td>
+                    <td>Apr 5, 2025</td>
+                    <td><span class="status-badge pending">Pending</span></td>
+                    <td>
+                      <button
+                        class="btn btn-sm btn-outline-primary me-1"
+                        data-bs-toggle="modal"
+                        data-bs-target="#viewReviewModal"
+                      >
+                        View
+                      </button>
+                      <button class="btn btn-sm btn-outline-success">
+                        Approve
+                      </button>
+                    </td>
+                  </tr>
+
+                  <!-- Review 3 -->
+                  <tr class="table-light">
+                    <td>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" />
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <img
+                          src="/api/placeholder/32/32"
+                          class="rounded-circle me-2"
+                          alt=""
+                        />
+                        <div>
+                          <h6 class="mb-0">Nume3</h6>
+                          <small class="text-muted">Premium Member</small>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Mercedes G-Wagon</td>
+                    <td>
+                      <div class="text-warning">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span class="ms-1 text-dark">2.0</span>
+                      </div>
+                    </td>
+                    <td>
+                      <p class="mb-0 text-truncate" style="max-width: 300px">
+                        Disappointing experience. The vehicle wasn't clean and
+                        had several minor damages not noted during pickup.
+                        Customer service was unresponsive to my concerns.
+                      </p>
+                    </td>
+                    <td>Apr 4, 2025</td>
+                    <td><span class="status-badge cancelled">Flagged</span></td>
+                    <td>
+                      <button
+                        class="btn btn-sm btn-outline-primary me-1"
+                        data-bs-toggle="modal"
+                        data-bs-target="#viewReviewModal"
+                      >
+                        View
+                      </button>
+                      <button class="btn btn-sm btn-outline-danger">
+                        Hide
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="admin-card-footer bg-light p-3">
+            <div
+              class="d-flex justify-content-between align-items-center flex-wrap"
+            >
+              <div class="mb-2 mb-md-0">
+                <p class="mb-0 text-muted">Showing 1 to 5 of 342 entries</p>
+              </div>
+              <div>
+                <nav aria-label="Page navigation">
+                  <ul class="pagination mb-0">
+                    <li class="page-item disabled">
+                      <a
+                        class="page-link"
+                        href="#"
+                        tabindex="-1"
+                        aria-disabled="true"
+                        >Previous</a
+                      >
+                    </li>
+                    <li class="page-item active">
+                      <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">3</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">Next</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="admin-card mb-4">
+          <div class="admin-card-header">
+            <h5 class="mb-0">Bulk Actions</h5>
+          </div>
+          <div class="admin-card-body">
+            <div class="d-flex flex-wrap gap-2">
+              <button class="btn btn-outline-success">
+                <i class="fas fa-check-circle me-2"></i
+                ><span class="d-none d-md-inline">Approve Selected</span>
+              </button>
+              <button class="btn btn-outline-primary">
+                <i class="fas fa-star me-2"></i
+                ><span class="d-none d-md-inline">Feature Selected</span>
+              </button>
+              <button class="btn btn-outline-secondary">
+                <i class="fas fa-envelope me-2"></i
+                ><span class="d-none d-md-inline">Reply to Selected</span>
+              </button>
+              <button class="btn btn-outline-warning">
+                <i class="fas fa-flag me-2"></i
+                ><span class="d-none d-md-inline">Flag Selected</span>
+              </button>
+              <button class="btn btn-outline-danger">
+                <i class="fas fa-times me-2"></i
+                ><span class="d-none d-md-inline">Hide Selected</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- View Review Modal -->
+    <div
+      class="modal fade"
+      id="viewReviewModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Review Details</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="d-flex mb-4">
+              <img
+                src="/api/placeholder/64/64"
+                class="rounded-circle me-3"
+                alt="Customer"
+              />
+              <div>
+                <h5 class="mb-1">Nume1</h5>
+                <div class="text-muted mb-2">Premium Member • Apr 2, 2025</div>
+                <div class="text-warning">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <span class="ms-1">5.0</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <div class="d-flex align-items-center mb-3">
+                <img
+                  src="/api/placeholder/60/40"
+                  class="img-thumbnail me-3"
+                  alt="Vehicle"
+                />
+                <div>
+                  <h6 class="mb-0">Range Rover Sport</h6>
+                  <small class="text-muted"
+                    >Rental #BK7829 • Apr 10 - Apr 13, 2025</small
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <h6>Review</h6>
+              <p>
+                Incredible experience! The Range Rover was immaculate and drove
+                like a dream. The pickup and return process was quick and
+                effortless. The staff was very professional and attentive to my
+                needs.
+              </p>
+              <p>
+                Would especially like to thank David at the Beverly Hills
+                location for his exceptional service and recommendations for
+                scenic drives. Will definitely be renting from DriveLux again on
+                my next trip to LA!
+              </p>
+            </div>
+
+            <div class="mb-4">
+              <h6>Customer Rating Breakdown</h6>
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Vehicle Condition</span>
+                    <span class="text-warning">
+                      <i class="fas fa-star"></i> 5
+                    </span>
+                  </div>
+                  <div class="progress mb-3" style="height: 6px">
+                    <div
+                      class="progress-bar bg-success"
+                      role="progressbar"
+                      style="width: 100%"
+                      aria-valuenow="100"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Staff Service</span>
+                    <span class="text-warning">
+                      <i class="fas fa-star"></i> 5
+                    </span>
+                  </div>
+                  <div class="progress mb-3" style="height: 6px">
+                    <div
+                      class="progress-bar bg-success"
+                      role="progressbar"
+                      style="width: 100%"
+                      aria-valuenow="100"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Value for Money</span>
+                    <span class="text-warning">
+                      <i class="fas fa-star"></i> 5
+                    </span>
+                  </div>
+                  <div class="progress mb-3" style="height: 6px">
+                    <div
+                      class="progress-bar bg-success"
+                      role="progressbar"
+                      style="width: 100%"
+                      aria-valuenow="100"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-4 border-top pt-3">
+              <h6 class="mb-3">Management Response</h6>
+              <div class="form-floating">
+                <textarea
+                  class="form-control"
+                  id="replyText"
+                  style="height: 120px"
+                  placeholder="Enter your response"
+                ></textarea>
+                <label for="replyText">Enter your response</label>
+              </div>
+            </div>
+
+            <div class="mb-0">
+              <h6>Admin Notes</h6>
+              <div class="d-flex mb-2">
+                <div class="form-check me-3">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="verifiedPurchase"
+                    checked
+                    disabled
+                  />
+                  <label class="form-check-label" for="verifiedPurchase">
+                    Verified Rental
+                  </label>
+                </div>
+                <div class="form-check me-3">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="recommendFlag"
+                  />
+                  <label class="form-check-label" for="recommendFlag">
+                    Feature on Homepage
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="flagReview"
+                  />
+                  <label class="form-check-label" for="flagReview">
+                    Flag for Review
+                  </label>
+                </div>
+              </div>
+              <div class="form-floating">
+                <textarea
+                  class="form-control"
+                  id="adminNotes"
+                  style="height: 80px"
+                  placeholder="Internal notes"
+                ></textarea>
+                <label for="adminNotes"
+                  >Internal notes (not visible to customers)</label
+                >
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="me-auto">
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                data-bs-dismiss="modal"
+              >
+                <i class="fas fa-flag me-2"></i>Flag Review
+              </button>
+            </div>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">
+              <i class="fas fa-reply me-2"></i>Post Response
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="navbar.js"></script>
+    <script src="admin-sidebar.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize the select all checkbox functionality
+        const selectAllCheckbox = document.getElementById("selectAll");
+        const checkboxes = document.querySelectorAll("tbody .form-check-input");
+
+        if (selectAllCheckbox) {
+          selectAllCheckbox.addEventListener("change", function () {
+            checkboxes.forEach((checkbox) => {
+              checkbox.checked = selectAllCheckbox.checked;
+            });
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DriveLux | Vehicle Management</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="admin-styles.css" />
+  </head>
+  <body>
+    <!-- Navbar will be injected here -->
+    <div id="navbar-container"></div>
+
+    <div class="admin-layout">
+      <!-- Sidebar will be injected here -->
+      <div id="sidebar-container"></div>
+
+      <!-- Main Content -->
+      <div class="admin-container">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div></div>
+          <div>
+            <a href="admin-car_details.html">
+              <button class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i
+                ><span class="d-none d-sm-inline">Add Vehicle</span>
+              </button></a
+            >
+          </div>
+        </div>
+
+        <!-- Quick Stats Row -->
+        <div class="row g-4 mb-4">
+          <div class="col-xl-3 col-md-6">
+            <div class="stat-card">
+              <h3>Total Vehicles</h3>
+              <div class="stat-value">42</div>
+              <div class="icon text-primary">
+                <i class="fas fa-car"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="stat-card">
+              <h3>Available Now</h3>
+              <div class="stat-value">28</div>
+              <div class="icon text-success">
+                <i class="fas fa-check-circle"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="stat-card">
+              <h3>Maintenance Due</h3>
+              <div class="stat-value">5</div>
+              <div class="icon text-warning">
+                <i class="fas fa-tools"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="stat-card">
+              <h3>Utilization Rate</h3>
+              <div class="stat-value">76%</div>
+              <div class="icon text-info">
+                <i class="fas fa-chart-line"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filters and Search -->
+        <div class="admin-card mb-4">
+          <div class="admin-card-body">
+            <div class="row g-3">
+              <div class="col-lg-3 col-md-6">
+                <label class="form-label">Search</label>
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Search vehicles..."
+                  />
+                  <button class="btn btn-outline-secondary" type="button">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-6">
+                <label class="form-label">Category</label>
+                <select class="form-select">
+                  <option value="">All Categories</option>
+                  <option value="suv">Luxury SUV</option>
+                  <option value="sports">Sports Car</option>
+                  <option value="electric">Electric Vehicle</option>
+                  <option value="sedan">Luxury Sedan</option>
+                  <option value="convertible">Convertible</option>
+                </select>
+              </div>
+              <div class="col-lg-2 col-md-6">
+                <label class="form-label">Status</label>
+                <select class="form-select">
+                  <option value="">All Status</option>
+                  <option value="available">Available</option>
+                  <option value="rented">Rented</option>
+                  <option value="maintenance">In Maintenance</option>
+                  <option value="repair">In Repair</option>
+                </select>
+              </div>
+              <div class="col-lg-2 col-md-6">
+                <label class="form-label">Sort By</label>
+                <select class="form-select">
+                  <option value="newest">Newest First</option>
+                  <option value="oldest">Oldest First</option>
+                  <option value="price-high">Price (High-Low)</option>
+                  <option value="price-low">Price (Low-High)</option>
+                </select>
+              </div>
+              <div class="col-lg-3 col-md-12 d-flex align-items-end">
+                <button class="btn btn-primary me-2">Apply Filters</button>
+                <button class="btn btn-outline-secondary">Reset</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vehicles Table -->
+        <div class="admin-card mb-4">
+          <div class="admin-card-body p-0">
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="selectAll"
+                        />
+                      </div>
+                    </th>
+                    <th>Image</th>
+                    <th>Vehicle Details</th>
+                    <th>Category</th>
+                    <th>Daily Rate</th>
+                    <th>Status</th>
+                    <th>Location</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Vehicle 1 -->
+                  <tr>
+                    <td>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" />
+                      </div>
+                    </td>
+                    <td>
+                      <img
+                        src="images/lambo.png"
+                        class="img-fluid rounded"
+                        alt="Range Rover"
+                        style="max-width: 80px"
+                      />
+                    </td>
+                    <td>
+                      <div>
+                        <h6 class="mb-0">Lamborghini Huracán</h6>
+                        <small class="text-muted">ID: #V2301</small>
+                      </div>
+                    </td>
+                    <td><span class="status-badge active">Sports Car</span></td>
+                    <td>$120</td>
+                    <td><span class="status-badge active">Available</span></td>
+                    <td>Baia Mare</td>
+                    <td>
+                      <div class="dropdown">
+                        <button
+                          class="btn btn-sm btn-light"
+                          type="button"
+                          data-bs-toggle="dropdown"
+                        >
+                          <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a class="dropdown-item" href="#"
+                              ><i class="fas fa-eye me-2"></i>View Details</a
+                            >
+                          </li>
+                          <li>
+                            <a class="dropdown-item" href="#"
+                              ><i class="fas fa-edit me-2"></i>Edit</a
+                            >
+                          </li>
+                          <li>
+                            <a class="dropdown-item" href="#"
+                              ><i class="fas fa-tools me-2"></i>Add
+                              Maintenance</a
+                            >
+                          </li>
+                          <li><hr class="dropdown-divider" /></li>
+                          <li>
+                            <a class="dropdown-item text-danger" href="#"
+                              ><i class="fas fa-trash-alt me-2"></i>Delete</a
+                            >
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Vehicle 2 -->
+                  <tr>
+                    <td>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" />
+                      </div>
+                    </td>
+                    <td>
+                      <img
+                        src="images/ferrari.png"
+                        class="img-fluid rounded"
+                        alt="Ferrari"
+                        style="max-width: 80px"
+                      />
+                    </td>
+                    <td>
+                      <div>
+                        <h6 class="mb-0">Ferrari 488</h6>
+                        <small class="text-muted">ID: #V2302</small>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="status-badge active">Sports Car</span>
+                    </td>
+                    <td>$200</td>
+                    <td><span class="status-badge pending">Rented</span></td>
+                    <td>Baia Mare</td>
+                    <td>
+                      <div class="dropdown">
+                        <button
+                          class="btn btn-sm btn-light"
+                          type="button"
+                          data-bs-toggle="dropdown"
+                        >
+                          <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a class="dropdown-item" href="#"
+                              ><i class="fas fa-eye me-2"></i>View Details</a
+                            >
+                          </li>
+                          <li>
+                            <a class="dropdown-item" href="#"
+                              ><i class="fas fa-edit me-2"></i>Edit</a
+                            >
+                          </li>
+                          <li>
+                            <a class="dropdown-item" href="#"
+                              ><i class="fas fa-tools me-2"></i>Add
+                              Maintenance</a
+                            >
+                          </li>
+                          <li><hr class="dropdown-divider" /></li>
+                          <li>
+                            <a class="dropdown-item text-danger" href="#"
+                              ><i class="fas fa-trash-alt me-2"></i>Delete</a
+                            >
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Vehicle 3 -->
+                  <tr>
+                    <td>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" />
+                      </div>
+                    </td>
+                    <td>
+                      <img
+                        src="images/tesla.png"
+                        class="img-fluid rounded"
+                        alt="Tesla"
+                        style="max-width: 80px"
+                      />
+                    </td>
+                    <td>
+                      <div>
+                        <h6 class="mb-0">Tesla Model S</h6>
+                        <small class="text-muted">ID: #V2303</small>
+                      </div>
+                    </td>
+                    <td><span class="status-badge pending">Electric</span></td>
+                    <td>$150</td>
+                    <td>
+                      <span class="status-badge cancelled">In Maintenance</span>
+                    </td>
+                    <td>Baia Mare</td>
+                    <td>
+                      <div class="dropdown">
+                        <button
+                          class="btn btn-sm btn-light"
+                          type="button"
+                          data-bs-toggle="dropdown"
+                        >
+                          <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a class="dropdown-item" href="#"
+                              ><i class="fas fa-eye me-2"></i>View Details</a
+                            >
+                          </li>
+                          <li>
+                            <a class="dropdown-item" href="#"
+                              ><i class="fas fa-edit me-2"></i>Edit</a
+                            >
+                          </li>
+                          <li>
+                            <a class="dropdown-item" href="#"
+                              ><i class="fas fa-tools me-2"></i>Add
+                              Maintenance</a
+                            >
+                          </li>
+                          <li><hr class="dropdown-divider" /></li>
+                          <li>
+                            <a class="dropdown-item text-danger" href="#"
+                              ><i class="fas fa-trash-alt me-2"></i>Delete</a
+                            >
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="admin-card-footer bg-light p-3">
+            <div
+              class="d-flex justify-content-between align-items-center flex-wrap"
+            >
+              <div class="mb-2 mb-md-0">
+                <p class="mb-0 text-muted">Showing 1 to 5 of 42 entries</p>
+              </div>
+              <div>
+                <nav aria-label="Page navigation">
+                  <ul class="pagination mb-0">
+                    <li class="page-item disabled">
+                      <a
+                        class="page-link"
+                        href="#"
+                        tabindex="-1"
+                        aria-disabled="true"
+                        >Previous</a
+                      >
+                    </li>
+                    <li class="page-item active">
+                      <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">3</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">Next</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bulk Actions -->
+        <div class="admin-card mb-4">
+          <div class="admin-card-header">
+            <h5 class="mb-0">Bulk Actions</h5>
+          </div>
+          <div class="admin-card-body">
+            <div class="d-flex flex-wrap gap-2">
+              <button class="btn btn-outline-primary">
+                <i class="fas fa-download me-2"></i
+                ><span class="d-none d-md-inline">Export Selected</span>
+              </button>
+              <button class="btn btn-outline-success">
+                <i class="fas fa-check-circle me-2"></i
+                ><span class="d-none d-md-inline">Set as Available</span>
+              </button>
+              <button class="btn btn-outline-warning">
+                <i class="fas fa-tools me-2"></i
+                ><span class="d-none d-md-inline">Schedule Maintenance</span>
+              </button>
+              <button class="btn btn-outline-danger">
+                <i class="fas fa-trash-alt me-2"></i
+                ><span class="d-none d-md-inline">Delete Selected</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- View Vehicle Modal -->
+    <div
+      class="modal fade"
+      id="viewVehicleModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Vehicle Details</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6">
+                <img
+                  src="/api/placeholder/400/250"
+                  class="img-fluid rounded mb-3"
+                  alt="Vehicle"
+                />
+                <div class="d-flex gap-2 mb-3">
+                  <img
+                    src="/api/placeholder/80/60"
+                    class="img-thumbnail"
+                    alt="Vehicle"
+                  />
+                  <img
+                    src="/api/placeholder/80/60"
+                    class="img-thumbnail"
+                    alt="Vehicle"
+                  />
+                  <img
+                    src="/api/placeholder/80/60"
+                    class="img-thumbnail"
+                    alt="Vehicle"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <h4>Range Rover Sport 2023</h4>
+                <p class="text-muted mb-3">
+                  ID: #V2301 • License Plate: LX-789-AB
+                </p>
+
+                <div class="mb-3">
+                  <span class="status-badge active">Available</span>
+                  <span class="status-badge active ms-2">Luxury SUV</span>
+                </div>
+
+                <h6>Specifications</h6>
+                <div class="row mb-3">
+                  <div class="col-6">
+                    <p class="mb-1"><strong>Make:</strong> Range Rover</p>
+                    <p class="mb-1"><strong>Model:</strong> Sport HSE</p>
+                    <p class="mb-1"><strong>Year:</strong> 2023</p>
+                  </div>
+                  <div class="col-6">
+                    <p class="mb-1"><strong>Seating:</strong> 5 Passengers</p>
+                    <p class="mb-1"><strong>Fuel Type:</strong> Hybrid</p>
+                    <p class="mb-1"><strong>Mileage:</strong> 12,450 mi</p>
+                  </div>
+                </div>
+
+                <h6>Pricing</h6>
+                <div class="row mb-3">
+                  <div class="col-6">
+                    <p class="mb-1"><strong>Daily Rate:</strong> $120</p>
+                    <p class="mb-1"><strong>Weekly Rate:</strong> $700</p>
+                  </div>
+                  <div class="col-6">
+                    <p class="mb-1"><strong>Monthly Rate:</strong> $2,800</p>
+                    <p class="mb-1">
+                      <strong>Security Deposit:</strong> $1,000
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Edit Vehicle</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+    <script src="admin-sidebar.js"></script>
+
+    <!-- Admin-specific scripts -->
+    <script>
+      // Sample admin-specific JavaScript
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize the select all checkbox functionality
+        const selectAllCheckbox = document.getElementById("selectAll");
+        const checkboxes = document.querySelectorAll("tbody .form-check-input");
+
+        if (selectAllCheckbox) {
+          selectAllCheckbox.addEventListener("change", function () {
+            checkboxes.forEach((checkbox) => {
+              checkbox.checked = selectAllCheckbox.checked;
+            });
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

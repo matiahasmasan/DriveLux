@@ -14,7 +14,6 @@ body {
   padding-bottom: 0;
 }
 
-/* Hero Section */
 .hero {
   height: 80vh;
   background: #2c3e50;
@@ -23,8 +22,55 @@ body {
   color: white;
 }
 
+.hero-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
 .hero-content {
-  max-width: 800px;
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px;
+}
+
+.hero-image {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.hero-image img:hover {
+  transform: scale(1.03);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: auto;
+    padding: 4rem 0;
+  }
+
+  .hero-row {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-content {
+    margin-bottom: 2rem;
+  }
+
+  .d-flex {
+    justify-content: center;
+  }
 }
 
 /* Car Cards */

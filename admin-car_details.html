@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DriveLux | Add/Edit Vehicle</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="admin-styles.css" />
+    <style>
+      .form-section {
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .form-section-title {
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid #eee;
+        color: var(--secondary-color);
+        font-weight: 600;
+      }
+
+      .image-preview {
+        width: 100%;
+        height: 250px;
+        background-color: #f8f9fa;
+        border: 1px dashed #ced4da;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+        overflow: hidden;
+      }
+
+      .image-preview img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
+
+      .thumbnail-preview {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 1rem;
+      }
+
+      .thumbnail-item {
+        width: 80px;
+        height: 60px;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .thumbnail-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .thumbnail-item .remove-btn {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      .add-thumbnail-btn {
+        width: 80px;
+        height: 60px;
+        border: 1px dashed #ced4da;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f8f9fa;
+        cursor: pointer;
+      }
+
+      .spec-row {
+        margin-bottom: 1rem;
+        padding: 1rem;
+        border: 1px solid #eee;
+        border-radius: 6px;
+        background-color: #fafafa;
+      }
+
+      .spec-row .form-select {
+        width: auto;
+        min-width: 120px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar will be injected here -->
+    <div id="navbar-container"></div>
+
+    <div class="admin-layout">
+      <!-- Sidebar will be injected here -->
+      <div id="sidebar-container"></div>
+
+      <!-- Main Content -->
+      <div class="admin-container">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h1 class="h3">Add New Vehicle</h1>
+          <div>
+            <button id="save-vehicle-btn" class="btn btn-primary">
+              <i class="fas fa-save me-2"></i>Save Vehicle
+            </button>
+            <a href="admin-cars.html" class="btn btn-outline-secondary ms-2">
+              <i class="fas fa-times me-2"></i>Cancel
+            </a>
+          </div>
+        </div>
+
+        <!-- Form Content -->
+        <form id="vehicle-form">
+          <!-- Basic Details Section -->
+          <div class="form-section">
+            <h3 class="form-section-title">Basic Details</h3>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="vehicle-name" class="form-label"
+                  >Vehicle Name*</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="vehicle-name"
+                  placeholder="e.g. Mercedes G-Wagon"
+                  required
+                />
+              </div>
+              <div class="col-md-3">
+                <label for="vehicle-year" class="form-label">Year*</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="vehicle-year"
+                  min="2000"
+                  max="2030"
+                  placeholder="e.g. 2024"
+                  required
+                />
+              </div>
+              <div class="col-md-3">
+                <label for="vehicle-status" class="form-label">Status*</label>
+                <select class="form-select" id="vehicle-status" required>
+                  <option value="available">Available</option>
+                  <option value="rented">Rented</option>
+                  <option value="maintenance">In Maintenance</option>
+                  <option value="repair">In Repair</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="vehicle-make" class="form-label">Make*</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="vehicle-make"
+                  placeholder="e.g. Mercedes"
+                  required
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="vehicle-model" class="form-label">Model*</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="vehicle-model"
+                  placeholder="e.g. G63 AMG"
+                  required
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="vehicle-category" class="form-label"
+                  >Category*</label
+                >
+                <select class="form-select" id="vehicle-category" required>
+                  <option value="suv">Luxury SUV</option>
+                  <option value="sports">Sports Car</option>
+                  <option value="electric">Electric Vehicle</option>
+                  <option value="sedan">Luxury Sedan</option>
+                  <option value="convertible">Convertible</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="vehicle-id" class="form-label">Vehicle ID</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="vehicle-id"
+                  placeholder="e.g. V2307"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="license-plate" class="form-label"
+                  >License Plate*</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="license-plate"
+                  placeholder="e.g. LX-789-AB"
+                  required
+                />
+              </div>
+              <div class="col-md-12">
+                <label for="vehicle-description" class="form-label"
+                  >Description</label
+                >
+                <textarea
+                  class="form-control"
+                  id="vehicle-description"
+                  rows="4"
+                  placeholder="Provide a detailed description of the vehicle..."
+                ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Images Section -->
+          <div class="form-section">
+            <h3 class="form-section-title">Vehicle Images</h3>
+            <div class="row g-3">
+              <div class="col-md-12">
+                <label class="form-label">Main Image*</label>
+                <div class="image-preview" id="main-image-preview">
+                  <span><i class="fas fa-plus"></i> Add Main Image</span>
+                </div>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="main-image-upload"
+                  accept="image/*"
+                />
+              </div>
+              <div class="col-md-12">
+                <label class="form-label">Gallery Images</label>
+                <div class="thumbnail-preview" id="thumbnail-container">
+                  <div class="add-thumbnail-btn" id="add-thumbnail-btn">
+                    <i class="fas fa-plus"></i>
+                  </div>
+                </div>
+                <input
+                  type="file"
+                  class="form-control d-none"
+                  id="thumbnail-upload"
+                  accept="image/*"
+                  multiple
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Specifications Section -->
+          <div class="form-section">
+            <h3 class="form-section-title">Specifications</h3>
+
+            <!-- Performance Specs -->
+            <h5 class="mb-3">Performance</h5>
+            <div id="performance-specs-container">
+              <div class="spec-row">
+                <div class="d-flex align-items-center">
+                  <div class="me-3">
+                    <select class="form-select icon-select">
+                      <option value="fa-tachometer-alt">Engine</option>
+                      <option value="fa-horse">Horsepower</option>
+                      <option value="fa-gauge-high">Acceleration</option>
+                      <option value="fa-gauge">Top Speed</option>
+                      <option value="fa-gas-pump">Fuel Economy</option>
+                    </select>
+                  </div>
+                  <div class="flex-grow-1">
+                    <div class="row g-2">
+                      <div class="col-md-5">
+                        <input
+                          type="text"
+                          class="form-control spec-label"
+                          placeholder="Label (e.g. Engine)"
+                        />
+                      </div>
+                      <div class="col-md-5">
+                        <input
+                          type="text"
+                          class="form-control spec-value"
+                          placeholder="Value (e.g. 5.2L V10)"
+                        />
+                      </div>
+                      <div class="col-md-2">
+                        <button
+                          type="button"
+                          class="btn btn-outline-danger remove-spec-btn"
+                        >
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-primary mt-2 mb-4"
+              id="add-performance-spec"
+            >
+              <i class="fas fa-plus me-1"></i> Add Performance Spec
+            </button>
+
+            <!-- Features Specs -->
+            <h5 class="mb-3">Features</h5>
+            <div id="features-specs-container">
+              <div class="spec-row">
+                <div class="d-flex align-items-center">
+                  <div class="me-3">
+                    <select class="form-select icon-select">
+                      <option value="fa-cog">Transmission</option>
+                      <option value="fa-gas-pump">Fuel Type</option>
+                      <option value="fa-road">Drive Type</option>
+                      <option value="fa-car">Body Style</option>
+                    </select>
+                  </div>
+                  <div class="flex-grow-1">
+                    <div class="row g-2">
+                      <div class="col-md-5">
+                        <input
+                          type="text"
+                          class="form-control spec-label"
+                          placeholder="Label (e.g. Transmission)"
+                        />
+                      </div>
+                      <div class="col-md-5">
+                        <input
+                          type="text"
+                          class="form-control spec-value"
+                          placeholder="Value (e.g. 7-speed Dual-Clutch)"
+                        />
+                      </div>
+                      <div class="col-md-2">
+                        <button
+                          type="button"
+                          class="btn btn-outline-danger remove-spec-btn"
+                        >
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-primary mt-2 mb-4"
+              id="add-features-spec"
+            >
+              <i class="fas fa-plus me-1"></i> Add Feature Spec
+            </button>
+
+            <!-- Dimensions Specs -->
+            <h5 class="mb-3">Dimensions & Capacity</h5>
+            <div id="dimensions-specs-container">
+              <div class="spec-row">
+                <div class="d-flex align-items-center">
+                  <div class="me-3">
+                    <select class="form-select icon-select">
+                      <option value="fa-users">Seating Capacity</option>
+                      <option value="fa-suitcase">Luggage Space</option>
+                      <option value="fa-arrows-alt-h">Length</option>
+                      <option value="fa-ruler-vertical">Height</option>
+                    </select>
+                  </div>
+                  <div class="flex-grow-1">
+                    <div class="row g-2">
+                      <div class="col-md-5">
+                        <input
+                          type="text"
+                          class="form-control spec-label"
+                          placeholder="Label (e.g. Seating Capacity)"
+                        />
+                      </div>
+                      <div class="col-md-5">
+                        <input
+                          type="text"
+                          class="form-control spec-value"
+                          placeholder="Value (e.g. 5 passengers)"
+                        />
+                      </div>
+                      <div class="col-md-2">
+                        <button
+                          type="button"
+                          class="btn btn-outline-danger remove-spec-btn"
+                        >
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-primary mt-2"
+              id="add-dimensions-spec"
+            >
+              <i class="fas fa-plus me-1"></i> Add Dimension Spec
+            </button>
+          </div>
+
+          <!-- Pricing Section -->
+          <div class="form-section">
+            <h3 class="form-section-title">Pricing & Availability</h3>
+            <div class="row g-3">
+              <div class="col-md-3">
+                <label for="daily-rate" class="form-label"
+                  >Daily Rate ($)*</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="daily-rate"
+                  min="0"
+                  step="0.01"
+                  placeholder="e.g. 120.00"
+                  required
+                />
+              </div>
+              <div class="col-md-3">
+                <label for="weekly-rate" class="form-label"
+                  >Weekly Rate ($)</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="weekly-rate"
+                  min="0"
+                  step="0.01"
+                  placeholder="e.g. 700.00"
+                />
+              </div>
+              <div class="col-md-3">
+                <label for="monthly-rate" class="form-label"
+                  >Monthly Rate ($)</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="monthly-rate"
+                  min="0"
+                  step="0.01"
+                  placeholder="e.g. 2800.00"
+                />
+              </div>
+              <div class="col-md-3">
+                <label for="security-deposit" class="form-label"
+                  >Security Deposit ($)</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="security-deposit"
+                  min="0"
+                  step="0.01"
+                  placeholder="e.g. 1000.00"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="mileage" class="form-label">Current Mileage</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="mileage"
+                  min="0"
+                  placeholder="e.g. 12450"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="location" class="form-label"
+                  >Current Location*</label
+                >
+                <select class="form-select" id="location" required>
+                  <option value="beverly-hills">Beverly Hills</option>
+                  <option value="hollywood">Hollywood</option>
+                  <option value="downtown">Downtown</option>
+                  <option value="santa-monica">Santa Monica</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Features Section -->
+          <div class="form-section">
+            <h3 class="form-section-title">Additional Features</h3>
+            <div class="row g-3">
+              <div class="col-md-12">
+                <div class="mb-3">
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="new-feature"
+                      placeholder="Add a feature (e.g. Navigation System)"
+                    />
+                    <button
+                      class="btn btn-outline-secondary"
+                      type="button"
+                      id="add-feature-btn"
+                    >
+                      Add
+                    </button>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <ul class="list-group" id="features-list">
+                      <li
+                        class="list-group-item d-flex justify-content-between align-items-center"
+                      >
+                        Premium Sound System
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-outline-danger remove-feature-btn"
+                        >
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </li>
+                      <li
+                        class="list-group-item d-flex justify-content-between align-items-center"
+                      >
+                        Bluetooth Connectivity
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-outline-danger remove-feature-btn"
+                        >
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </li>
+                      <li
+                        class="list-group-item d-flex justify-content-between align-items-center"
+                      >
+                        Navigation System
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-outline-danger remove-feature-btn"
+                        >
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Maintenance Information -->
+          <div class="form-section">
+            <h3 class="form-section-title">Maintenance Information</h3>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="last-maintenance" class="form-label"
+                  >Last Maintenance Date</label
+                >
+                <input type="date" class="form-control" id="last-maintenance" />
+              </div>
+              <div class="col-md-6">
+                <label for="next-maintenance" class="form-label"
+                  >Next Scheduled Maintenance</label
+                >
+                <input type="date" class="form-control" id="next-maintenance" />
+              </div>
+              <div class="col-md-12">
+                <label for="maintenance-notes" class="form-label"
+                  >Maintenance Notes</label
+                >
+                <textarea
+                  class="form-control"
+                  id="maintenance-notes"
+                  rows="3"
+                  placeholder="Enter any maintenance notes or history..."
+                ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit Button Row -->
+          <div class="row mt-4 mb-5">
+            <div class="col-12 d-flex justify-content-between">
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                onclick="window.location.href='admin-cars.html'"
+              >
+                <i class="fas fa-arrow-left me-2"></i>Back to Vehicles
+              </button>
+              <div>
+                <button type="button" class="btn btn-outline-primary me-2">
+                  <i class="fas fa-save me-2"></i>Save as Draft
+                </button>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-check-circle me-2"></i>Save and Publish
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+    <script src="admin-sidebar.js"></script>
+
+    <!-- Page specific script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Image preview functionality
+        const mainImageUpload = document.getElementById("main-image-upload");
+        const mainImagePreview = document.getElementById("main-image-preview");
+
+        mainImageUpload.addEventListener("change", function () {
+          const file = this.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              mainImagePreview.innerHTML = `<img src="${e.target.result}" alt="Main Vehicle Image">`;
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+
+        mainImagePreview.addEventListener("click", function () {
+          mainImageUpload.click();
+        });
+
+        // Thumbnail upload functionality
+        const thumbnailUpload = document.getElementById("thumbnail-upload");
+        const thumbnailContainer = document.getElementById(
+          "thumbnail-container"
+        );
+        const addThumbnailBtn = document.getElementById("add-thumbnail-btn");
+
+        addThumbnailBtn.addEventListener("click", function () {
+          thumbnailUpload.click();
+        });
+
+        thumbnailUpload.addEventListener("change", function () {
+          const files = this.files;
+          for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+              const thumbnailItem = document.createElement("div");
+              thumbnailItem.className = "thumbnail-item";
+              thumbnailItem.innerHTML = `
+                <img src="${e.target.result}" alt="Thumbnail">
+                <div class="remove-btn"><i class="fas fa-times"></i></div>
+              `;
+
+              // Insert before the add button
+              thumbnailContainer.insertBefore(thumbnailItem, addThumbnailBtn);
+
+              // Add remove functionality
+              thumbnailItem
+                .querySelector(".remove-btn")
+                .addEventListener("click", function () {
+                  thumbnailItem.remove();
+                });
+            };
+
+            reader.readAsDataURL(file);
+          }
+        });
+
+        // Add specification functionality
+        function addSpecRow(containerId) {
+          const container = document.getElementById(containerId);
+          const specRow = document.createElement("div");
+          specRow.className = "spec-row";
+          specRow.innerHTML = container.querySelector(".spec-row").innerHTML;
+
+          // Reset input values
+          specRow
+            .querySelectorAll("input")
+            .forEach((input) => (input.value = ""));
+
+          container.appendChild(specRow);
+
+          // Add event listener to remove button
+          const removeBtn = specRow.querySelector(".remove-spec-btn");
+          removeBtn.addEventListener("click", function () {
+            specRow.remove();
+          });
+        }
+
+        document
+          .getElementById("add-performance-spec")
+          .addEventListener("click", function () {
+            addSpecRow("performance-specs-container");
+          });
+
+        document
+          .getElementById("add-features-spec")
+          .addEventListener("click", function () {
+            addSpecRow("features-specs-container");
+          });
+
+        document
+          .getElementById("add-dimensions-spec")
+          .addEventListener("click", function () {
+            addSpecRow("dimensions-specs-container");
+          });
+
+        // Add feature functionality
+        const addFeatureBtn = document.getElementById("add-feature-btn");
+        const newFeatureInput = document.getElementById("new-feature");
+        const featuresList = document.getElementById("features-list");
+
+        addFeatureBtn.addEventListener("click", function () {
+          const featureText = newFeatureInput.value.trim();
+          if (featureText) {
+            const li = document.createElement("li");
+            li.className =
+              "list-group-item d-flex justify-content-between align-items-center";
+            li.innerHTML = `
+              ${featureText}
+              <button type="button" class="btn btn-sm btn-outline-danger remove-feature-btn">
+                <i class="fas fa-times"></i>
+              </button>
+            `;
+
+            featuresList.appendChild(li);
+            newFeatureInput.value = "";
+
+            // Add remove functionality
+            li.querySelector(".remove-feature-btn").addEventListener(
+              "click",
+              function () {
+                li.remove();
+              }
+            );
+          }
+        });
+
+        // Add remove functionality to existing feature buttons
+        document.querySelectorAll(".remove-feature-btn").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            this.closest("li").remove();
+          });
+        });
+
+        // Add remove functionality to existing spec buttons
+        document.querySelectorAll(".remove-spec-btn").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            if (
+              this.closest(".spec-row").parentElement.querySelectorAll(
+                ".spec-row"
+              ).length > 1
+            ) {
+              this.closest(".spec-row").remove();
+            }
+          });
+        });
+
+        // Form submission
+        document
+          .getElementById("vehicle-form")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            // Here you would typically collect all form data and send to server
+            alert("Vehicle saved successfully!");
+
+            // Redirect back to vehicles list
+            // window.location.href = 'admin-cars.html';
+          });
+
+        // Alternative save button
+        document
+          .getElementById("save-vehicle-btn")
+          .addEventListener("click", function () {
+            document
+              .getElementById("vehicle-form")
+              .dispatchEvent(new Event("submit"));
+          });
+      });
+    </script>
+  </body>
+</html>

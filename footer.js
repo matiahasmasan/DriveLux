@@ -44,15 +44,15 @@ const footer = `
                 <ul class="list-unstyled">
                     <li class="mb-3 d-flex">
                         <i class="fas fa-map-marker-alt me-3 mt-1"></i>
-                        <span>123 Luxury Drive, Beverly Hills, CA 90210</span>
+                        <span>Bulevardul Republicii 90, Mare 430231</span>
                     </li>
                     <li class="mb-3 d-flex">
                         <i class="fas fa-phone-alt me-3 mt-1"></i>
-                        <span>+1 (800) DRIVE-LUX</span>
+                        <span>+40 771 170 938</span>
                     </li>
                     <li class="mb-3 d-flex">
                         <i class="fas fa-envelope me-3 mt-1"></i>
-                        <span>info@drivelux.com</span>
+                        <span>exemplu@drivelux.com</span>
                     </li>
                     <li class="mb-2"><a href="404.html" class="text-white text-decoration-none">404 page</a></li>
                     <li class="mb-2"><a href="success.html" class="text-white text-decoration-none">Success</a></li>

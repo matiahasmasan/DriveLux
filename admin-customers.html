@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DriveLux | Customer Management</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="admin-styles.css" />
+  </head>
+  <body>
+    <!-- Navbar will be injected here -->
+    <div id="navbar-container"></div>
+
+    <div class="admin-layout">
+      <!-- Sidebar will be injected here -->
+      <div id="sidebar-container"></div>
+
+      <!-- Main Content -->
+      <div class="admin-container">
+        <!-- Header -->
+        <div
+          class="d-flex justify-content-between align-items-center mb-4"
+        ></div>
+
+        <!-- Statistics Cards -->
+        <div class="row g-4 mb-4">
+          <div class="col-xl-3 col-md-6">
+            <div class="stat-card">
+              <h3>Total Customers</h3>
+              <div class="stat-value">1,248</div>
+              <div class="trend text-success">
+                <i class="fas fa-arrow-up"></i> 9.2%
+              </div>
+              <div class="icon">
+                <i class="fas fa-users"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="stat-card">
+              <h3>Premium Members</h3>
+              <div class="stat-value">286</div>
+              <div class="trend text-info">
+                <i class="fas fa-percentage"></i> 22.9% of total
+              </div>
+              <div class="icon">
+                <i class="fas fa-crown"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="stat-card">
+              <h3>Active Rentals</h3>
+              <div class="stat-value">42</div>
+              <div class="trend text-warning">
+                <i class="fas fa-car"></i> In progress
+              </div>
+              <div class="icon">
+                <i class="fas fa-key"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="stat-card">
+              <h3>New Sign-ups</h3>
+              <div class="stat-value">36</div>
+              <div class="trend text-primary">
+                <i class="fas fa-calendar"></i> This month
+              </div>
+              <div class="icon">
+                <i class="fas fa-user-plus"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="admin-card mb-4">
+          <div class="admin-card-body">
+            <div class="row g-3">
+              <div class="col-lg-3 col-md-6">
+                <label class="form-label">Search</label>
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Name, email, phone..."
+                  />
+                  <button class="btn btn-outline-secondary" type="button">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-6">
+                <label class="form-label">Membership</label>
+                <select class="form-select">
+                  <option value="">All Types</option>
+                  <option value="standard">Standard</option>
+                  <option value="premium">Premium</option>
+                </select>
+              </div>
+              <div class="col-lg-2 col-md-6">
+                <label class="form-label">Status</label>
+                <select class="form-select">
+                  <option value="">All Status</option>
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                  <option value="flagged">Flagged</option>
+                </select>
+              </div>
+              <div class="col-lg-2 col-md-6">
+                <label class="form-label">Sort By</label>
+                <select class="form-select">
+                  <option value="name">Name</option>
+                  <option value="recent">Most Recent</option>
+                  <option value="rentals">Most Rentals</option>
+                  <option value="spending">Highest Spending</option>
+                </select>
+              </div>
+              <div class="col-lg-3 col-md-12 d-flex align-items-end">
+                <button class="btn btn-primary me-2">Apply Filters</button>
+                <button class="btn btn-outline-secondary">Reset</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customer Table -->
+        <div class="admin-card mb-4">
+          <div class="admin-card-body p-0">
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="selectAll"
+                        />
+                      </div>
+                    </th>
+                    <th>Customer</th>
+                    <th>Contact</th>
+                    <th>Member Since</th>
+                    <th>Rentals</th>
+                    <th>Total Spent</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Customer 1 -->
+                  <tr>
+                    <td>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" />
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <img
+                          src="/api/placeholder/40/40"
+                          class="rounded-circle me-2"
+                          alt=""
+                        />
+                        <div>
+                          <h6 class="mb-0">Nume1</h6>
+                          <span class="badge bg-warning text-dark"
+                            >Premium</span
+                          >
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+                        <div>
+                          <i class="fas fa-envelope me-1 text-muted"></i>
+                          exemplu@gmail.com
+                        </div>
+                        <div>
+                          <i class="fas fa-phone me-1 text-muted"></i> +40 771
+                          170 938
+                        </div>
+                      </div>
+                    </td>
+                    <td>Jan 15, 2024</td>
+                    <td>
+                      <div>
+                        <span class="fw-bold">12</span> completed
+                        <div class="small text-success">1 active</div>
+                      </div>
+                    </td>
+                    <td>$24,850</td>
+                    <td><span class="status-badge active">Active</span></td>
+                    <td>
+                      <div class="dropdown">
+                        <button
+                          class="btn btn-sm btn-light"
+                          type="button"
+                          data-bs-toggle="dropdown"
+                        >
+                          <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a
+                              class="dropdown-item"
+                              href="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#viewCustomerModal"
+                              ><i class="fas fa-eye me-2"></i>View Details</a
+                            >
+                          </li>
+                          <li>
+                            <a class="dropdown-item" href="#"
+                              ><i class="fas fa-edit me-2"></i>Edit</a
+                            >
+                          </li>
+                          <li>
+                            <a class="dropdown-item" href="#"
+                              ><i class="fas fa-car me-2"></i>View Rentals</a
+                            >
+                          </li>
+                          <li><hr class="dropdown-divider" /></li>
+                          <li>
+                            <a class="dropdown-item text-danger" href="#"
+                              ><i class="fas fa-flag me-2"></i>Flag Account</a
+                            >
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Customer 2 -->
+                  <tr>
+                    <td>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" />
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <img
+                          src="/api/placeholder/40/40"
+                          class="rounded-circle me-2"
+                          alt=""
+                        />
+                        <div>
+                          <h6 class="mb-0">Nume2</h6>
+                          <span class="badge bg-secondary">Standard</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+                        <div>
+                          <i class="fas fa-envelope me-1 text-muted"></i>
+                          exemplu@gmail.com
+                        </div>
+                        <div>
+                          <i class="fas fa-phone me-1 text-muted"></i> +40 771
+                          170 938
+                        </div>
+                      </div>
+                    </td>
+                    <td>Feb 3, 2025</td>
+                    <td>
+                      <div>
+                        <span class="fw-bold">1</span> completed
+                        <div class="small text-warning">1 pending</div>
+                      </div>
+                    </td>
+                    <td>$1,200</td>
+                    <td><span class="status-badge active">Active</span></td>
+                    <td>
+                      <div class="dropdown">
+                        <button
+                          class="btn btn-sm btn-light"
+                          type="button"
+                          data-bs-toggle="dropdown"
+                        >
+                          <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a
+                              class="dropdown-item"
+                              href="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#viewCustomerModal"
+                              ><i class="fas fa-eye me-2"></i>View Details</a
+                            >
+                          </li>
+                          <li>
+                            <a class="dropdown-item" href="#"
+                              ><i class="fas fa-edit me-2"></i>Edit</a
+                            >
+                          </li>
+                          <li>
+                            <a class="dropdown-item" href="#"
+                              ><i class="fas fa-car me-2"></i>View Rentals</a
+                            >
+                          </li>
+                          <li><hr class="dropdown-divider" /></li>
+                          <li>
+                            <a class="dropdown-item text-danger" href="#"
+                              ><i class="fas fa-flag me-2"></i>Flag Account</a
+                            >
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="admin-card-footer bg-light p-3">
+            <div
+              class="d-flex justify-content-between align-items-center flex-wrap"
+            >
+              <div class="mb-2 mb-md-0">
+                <p class="mb-0 text-muted">Showing 1 to 5 of 1,248 entries</p>
+              </div>
+              <div>
+                <nav aria-label="Page navigation">
+                  <ul class="pagination mb-0">
+                    <li class="page-item disabled">
+                      <a
+                        class="page-link"
+                        href="#"
+                        tabindex="-1"
+                        aria-disabled="true"
+                        >Previous</a
+                      >
+                    </li>
+                    <li class="page-item active">
+                      <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">3</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">Next</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="admin-card mb-4">
+          <div class="admin-card-header">
+            <h5 class="mb-0">Quick Actions</h5>
+          </div>
+          <div class="admin-card-body">
+            <div class="d-flex flex-wrap gap-2">
+              <button class="btn btn-outline-primary">
+                <i class="fas fa-envelope me-2"></i
+                ><span class="d-none d-md-inline">Email Selected</span>
+              </button>
+              <button class="btn btn-outline-success">
+                <i class="fas fa-tag me-2"></i
+                ><span class="d-none d-md-inline">Send Discount</span>
+              </button>
+              <button class="btn btn-outline-info">
+                <i class="fas fa-crown me-2"></i
+                ><span class="d-none d-md-inline">Upgrade to Premium</span>
+              </button>
+              <button class="btn btn-outline-warning">
+                <i class="fas fa-file-export me-2"></i
+                ><span class="d-none d-md-inline">Export Data</span>
+              </button>
+              <button class="btn btn-outline-danger">
+                <i class="fas fa-flag me-2"></i
+                ><span class="d-none d-md-inline">Flag Selected</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- View Customer Modal -->
+    <div
+      class="modal fade"
+      id="viewCustomerModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Customer Details</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="row mb-4">
+              <div class="col-md-4 text-center">
+                <img
+                  src="/api/placeholder/120/120"
+                  class="rounded-circle mb-3"
+                  alt="Customer"
+                />
+                <h5 class="mb-1">Sarah Johnson</h5>
+                <span class="badge bg-warning text-dark mb-2"
+                  >Premium Member</span
+                >
+                <div class="d-flex justify-content-center">
+                  <button class="btn btn-sm btn-outline-primary me-2">
+                    <i class="fas fa-envelope"></i>
+                  </button>
+                  <button class="btn btn-sm btn-outline-success">
+                    <i class="fas fa-phone"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <h6>Personal Information</h6>
+                    <table class="table table-sm">
+                      <tr>
+                        <td class="text-muted">Email:</td>
+                        <td>sarah.johnson@example.com</td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted">Phone:</td>
+                        <td>(555) 123-4567</td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted">Address:</td>
+                        <td>1234 Beverly Hills Dr, Los Angeles, CA 90210</td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted">Date of Birth:</td>
+                        <td>May 15, 1988</td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="col-md-6">
+                    <h6>Account Information</h6>
+                    <table class="table table-sm">
+                      <tr>
+                        <td class="text-muted">Customer ID:</td>
+                        <td>#CUS4752</td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted">Member Since:</td>
+                        <td>Jan 15, 2024</td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted">Status:</td>
+                        <td><span class="status-badge active">Active</span></td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted">Membership:</td>
+                        <td>Premium (Expires: Jan 15, 2026)</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <h6>Rental Information</h6>
+                <table class="table table-sm">
+                  <tr>
+                    <td class="text-muted">Total Rentals:</td>
+                    <td>12 completed</td>
+                  </tr>
+                  <tr>
+                    <td class="text-muted">Active Rentals:</td>
+                    <td>1 in progress</td>
+                  </tr>
+                  <tr>
+                    <td class="text-muted">Total Spent:</td>
+                    <td>$24,850</td>
+                  </tr>
+                  <tr>
+                    <td class="text-muted">Favorite Vehicle:</td>
+                    <td>Range Rover Sport (4 rentals)</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="col-md-6">
+                <h6>Driver Information</h6>
+                <table class="table table-sm">
+                  <tr>
+                    <td class="text-muted">License Number:</td>
+                    <td>CA987654321</td>
+                  </tr>
+                  <tr>
+                    <td class="text-muted">License Expiry:</td>
+                    <td>May 15, 2028</td>
+                  </tr>
+                  <tr>
+                    <td class="text-muted">Insurance:</td>
+                    <td>Premium Coverage</td>
+                  </tr>
+                  <tr>
+                    <td class="text-muted">Verification:</td>
+                    <td>
+                      <span class="text-success"
+                        ><i class="fas fa-check-circle"></i> Verified</span
+                      >
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-12">
+                <h6>Recent Rentals</h6>
+                <div class="table-responsive">
+                  <table class="table table-sm table-hover">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Booking ID</th>
+                        <th>Vehicle</th>
+                        <th>Dates</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><a href="#">#BK7829</a></td>
+                        <td>Range Rover Sport</td>
+                        <td>Apr 10 - Apr 13, 2025</td>
+                        <td>$424.78</td>
+                        <td><span class="status-badge active">Active</span></td>
+                      </tr>
+                      <tr>
+                        <td><a href="#">#BK7745</a></td>
+                        <td>Tesla Model S</td>
+                        <td>Mar 5 - Mar 8, 2025</td>
+                        <td>$680.00</td>
+                        <td><span class="status-badge">Completed</span></td>
+                      </tr>
+                      <tr>
+                        <td><a href="#">#BK7692</a></td>
+                        <td>Porsche 911</td>
+                        <td>Feb 14 - Feb 17, 2025</td>
+                        <td>$975.50</td>
+                        <td><span class="status-badge">Completed</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <a href="#" class="text-decoration-none">View all 12 rentals</a>
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <h6>Payment Methods</h6>
+                <div class="card mb-2">
+                  <div class="card-body py-2">
+                    <div class="d-flex align-items-center">
+                      <i class="fab fa-cc-visa fa-2x text-primary me-3"></i>
+                      <div>
+                        <div>Visa ending in 4582</div>
+                        <small class="text-muted">Expires: 09/27</small>
+                      </div>
+                      <div class="ms-auto">
+                        <span class="badge bg-success">Default</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card mb-2">
+                  <div class="card-body py-2">
+                    <div class="d-flex align-items-center">
+                      <i
+                        class="fab fa-cc-mastercard fa-2x text-danger me-3"
+                      ></i>
+                      <div>
+                        <div>MasterCard ending in 8971</div>
+                        <small class="text-muted">Expires: 12/26</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <h6>Notes & Preferences</h6>
+                <div class="mb-3">
+                  <div class="form-floating">
+                    <textarea
+                      class="form-control"
+                      id="customerNotes"
+                      style="height: 100px"
+                    >
+VIP client - Always request child seat and GPS navigation. Prefers vehicles in black.</textarea
+                    >
+                    <label for="customerNotes">Internal Notes</label>
+                  </div>
+                </div>
+                <div>
+                  <span class="badge bg-info me-1">Prefers SUVs</span>
+                  <span class="badge bg-info me-1">GPS Navigation</span>
+                  <span class="badge bg-info me-1">Child Seat</span>
+                  <span class="badge bg-info me-1">Black Vehicles</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <h6>Communication History</h6>
+                <ul class="timeline">
+                  <li class="timeline-item">
+                    <span class="timeline-point bg-primary"
+                      ><i class="fas fa-envelope"></i
+                    ></span>
+                    <div class="timeline-content">
+                      <h6 class="mb-0">Email Sent: Booking Confirmation</h6>
+                      <small class="text-muted">Apr 1, 2025 10:23 AM</small>
+                      <p class="mt-1 mb-0">
+                        Booking confirmation for Range Rover Sport rental
+                        #BK7829.
+                      </p>
+                    </div>
+                  </li>
+                  <li class="timeline-item">
+                    <span class="timeline-point bg-success"
+                      ><i class="fas fa-phone"></i
+                    ></span>
+                    <div class="timeline-content">
+                      <h6 class="mb-0">Phone Call: Membership Renewal</h6>
+                      <small class="text-muted">Jan 10, 2025 2:15 PM</small>
+                      <p class="mt-1 mb-0">
+                        Customer renewed premium membership for 1 year.
+                      </p>
+                    </div>
+                  </li>
+                  <li class="timeline-item">
+                    <span class="timeline-point bg-info"
+                      ><i class="fas fa-comment"></i
+                    ></span>
+                    <div class="timeline-content">
+                      <h6 class="mb-0">SMS: Rental Reminder</h6>
+                      <small class="text-muted">Dec 12, 2024 9:00 AM</small>
+                      <p class="mt-1 mb-0">
+                        Reminder for upcoming Tesla Model S rental.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="me-auto">
+              <button type="button" class="btn btn-outline-danger">
+                <i class="fas fa-flag me-2"></i>Flag Account
+              </button>
+            </div>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">
+              <i class="fas fa-edit me-2"></i>Edit Profile
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Customer Modal -->
+    <div
+      class="modal fade"
+      id="addCustomerModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add New Customer</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <h6>Personal Information</h6>
+                  <div class="mb-3">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="firstName"
+                      placeholder="Enter first name"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="lastName"
+                      placeholder="Enter last name"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      placeholder="Enter email"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input
+                      type="tel"
+                      class="form-control"
+                      id="phone"
+                      placeholder="Enter phone number"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="dob" class="form-label">Date of Birth</label>
+                    <input type="date" class="form-control" id="dob" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <h6>Address</h6>
+                  <div class="mb-3">
+                    <label for="street" class="form-label"
+                      >Street Address</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="street"
+                      placeholder="Enter street address"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="city" class="form-label">City</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="city"
+                      placeholder="Enter city"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="state" class="form-label">State</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="state"
+                      placeholder="Enter state"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="zipCode" class="form-label">ZIP Code</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="zipCode"
+                      placeholder="Enter ZIP code"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="country" class="form-label">Country</label>
+                    <select class="form-select" id="country">
+                      <option value="US" selected>United States</option>
+                      <option value="CA">Canada</option>
+                      <option value="UK">United Kingdom</option>
+                      <option value="AU">Australia</option>
+                      <option value="FR">France</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <h6>Driver Information</h6>
+                  <div class="mb-3">
+                    <label for="licenseNumber" class="form-label"
+                      >Driver's License Number</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="licenseNumber"
+                      placeholder="Enter license number"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="licenseState" class="form-label"
+                      >Issuing State</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="licenseState"
+                      placeholder="Enter issuing state"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="licenseExpiry" class="form-label"
+                      >License Expiry Date</label
+                    >
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="licenseExpiry"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <h6>Account Settings</h6>
+                  <div class="mb-3">
+                    <label for="membershipType" class="form-label"
+                      >Membership Type</label
+                    >
+                    <select class="form-select" id="membershipType">
+                      <option value="standard" selected>Standard</option>
+                      <option value="premium">Premium</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="password" class="form-label"
+                      >Temporary Password</label
+                    >
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="password"
+                        placeholder="Auto-generated password"
+                      />
+                      <button class="btn btn-outline-secondary" type="button">
+                        Generate
+                      </button>
+                    </div>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="sendWelcomeEmail"
+                      checked
+                    />
+                    <label class="form-check-label" for="sendWelcomeEmail">
+                      Send welcome email with login details
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <h6>Notes</h6>
+                <textarea
+                  class="form-control"
+                  id="adminNotes"
+                  rows="3"
+                  placeholder="Add any notes about this customer"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button type="button" class="btn btn-primary">
+              Create Customer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="navbar.js"></script>
+    <script src="admin-sidebar.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize the select all checkbox functionality
+        const selectAllCheckbox = document.getElementById("selectAll");
+        const checkboxes = document.querySelectorAll("tbody .form-check-input");
+
+        if (selectAllCheckbox) {
+          selectAllCheckbox.addEventListener("change", function () {
+            checkboxes.forEach((checkbox) => {
+              checkbox.checked = selectAllCheckbox.checked;
+            });
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
